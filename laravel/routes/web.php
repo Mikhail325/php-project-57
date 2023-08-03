@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\LabelController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,11 +20,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/task_statuses', [StatusController::class, 'index']);
-Route::get('/task_statuses/create', [StatusController::class, 'create']);
-Route::get('/task_statuses/update', [StatusController::class, 'update']);
-Route::get('/task_statuses/delete', [StatusController::class, 'delete']);
+Route::get('/task_statuses', [StatusController::class, 'index'])->name('status.index');
+Route::get('/task_statuses/create', [StatusController::class, 'create'])->name('status.create');
+Route::POST('/task_statuses', [StatusController::class, 'store'])->name('status.store');
+Route::get('/task_statuses/{id}/edit', [StatusController::class, 'edit'])->name('status.edit');
+Route::patch('/task_statuses/{id}', [StatusController::class, 'update'])->name('status.update');
+Route::delete('/task_statuses/{id}', [StatusController::class, 'destroy'])->name('status.destroy');
 
+Route::get('/labels', [LabelController::class, 'index'])->name('label.index');
+Route::get('/labels/create', [LabelController::class, 'create'])->name('label.create');
+Route::POST('/labels', [LabelController::class, 'store'])->name('label.store');
+Route::get('/labels/{id}/edit', [LabelController::class, 'edit'])->name('label.edit');
+Route::patch('/labels/{id}', [LabelController::class, 'update'])->name('label.update');
+Route::delete('/labels/{id}', [LabelController::class, 'destroy'])->name('label.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

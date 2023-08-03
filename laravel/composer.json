@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "laravelcollective/html": "^6.4",
         "rollbar/rollbar-laravel": "^8.0"
     },
     "require-dev": {
