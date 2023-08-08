@@ -11,4 +11,9 @@ class Label extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = false;
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'label_id', 'id');
+    }
 }

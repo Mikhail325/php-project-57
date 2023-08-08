@@ -11,4 +11,9 @@ class Status extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = false;
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class, 'status_id', 'id');
+    }
 }
