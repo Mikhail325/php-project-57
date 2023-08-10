@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\LabelController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');
+Route::POST('/tasks', [TaskController::class, 'store'])->name('task.store');
+Route::get('/tasks/{id}/edit', [TaskController::class, 'edit'])->name('task.edit');
+Route::patch('/tasks/{id}', [TaskController::class, 'update'])->name('task.update');
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 Route::get('/task_statuses', [StatusController::class, 'index'])->name('status.index');
 Route::get('/task_statuses/create', [StatusController::class, 'create'])->name('status.create');

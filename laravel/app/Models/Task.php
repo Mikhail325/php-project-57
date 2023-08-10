@@ -17,9 +17,9 @@ class Task extends Model
         return $this->belongsTo(Status::class, 'status_id', 'id');
     }
 
-    public function label()
+    public function labels()
     {
-        return $this->belongsTo(Label::class, 'label_id', 'id');
+        return $this->belongsToMany(Label::class, 'label_tasks', 'task_id', 'label_id');
     }
 
     public function userExecutor()

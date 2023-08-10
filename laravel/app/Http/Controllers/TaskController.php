@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Status;
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Label;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -22,7 +26,10 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        return view('task.create', compact('task'));
+        $statuses = Status::all();
+        $users = User::all();
+        $labels = Label::all();
+        return view('task.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -31,14 +38,25 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:statuses', //--------------------dobavit
+            'name' => 'required|unique:tasks', //--------------------dobavit
+            'description' => 'required|required',
+            'status_id' => 'required|integer',
+            'user_executor_id' => 'required|integer',
+            'label' => '',
         ]);
+        $label = $data['label'];
+        unset($data['label']);
 
         $task = new Task();
         // Заполнение статьи данными из формы
         $task->fill($data);
-        // При ошибках сохранения возникнет исключение
+        $task->user_author_id = Auth::id();
         $task->save();
+        
+        $task->labels()->attach($label);
+        dd($task->labels);
+        // При ошибках сохранения возникнет исключение
+        
 
         // Редирект на указанный маршрут
         return redirect()->route('task.index');

@@ -3,6 +3,7 @@
 @section('content')
 <h1 class="mt-5 mb-5">Статусы</h1>
 <div>
+  <a href="{{route('status.create')}}">Создать</a>
   <table class="table table-success table-striped">
     <thead>
       <tr>
@@ -13,12 +14,12 @@
       </tr>
     </thead>
     <tbody>
-        @foreach ($statuses as $stastus)
+        @foreach ($statuses as $status)
             <tr>
-                <th scope="row">{{$stastus->id}}</th>
-                <td>{{$stastus->name}}</td>
-                <td>{{$stastus->created_at}}</td>
-                <td><a href="{{route('status.destroy', $stastus)}}" data-method="delete" rel="nofollow">Удалить</a></td>
+                <th scope="row">{{$status->id}}</th>
+                <td>{{$status->name}}</td>
+                <td>{{$status->created_at}}</td>
+                <td><a href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">Удалить</a></td>
             </tr>
         @endforeach
     </tbody>

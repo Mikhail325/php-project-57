@@ -1,8 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Статусы</h1>
+<h1 class="mt-5 mb-5">Метки</h1>
 <div>
+  <a href="{{route('label.create')}}">Создать</a>
   <table class="table table-success table-striped">
     <thead>
       <tr>
