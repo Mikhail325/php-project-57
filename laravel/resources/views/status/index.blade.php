@@ -10,7 +10,11 @@
         <th scope="col">Id</th>
         <th scope="col">Имя</th>
         <th scope="col">Дата создания</th>
-        <th scope="col">Действия</th>
+        @if (Route::has('login'))
+          @auth
+            <th scope="col">Действия</th>
+          @endif
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -19,7 +23,14 @@
                 <th scope="row">{{$status->id}}</th>
                 <td>{{$status->name}}</td>
                 <td>{{$status->created_at}}</td>
-                <td><a href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">Удалить</a></td>
+                @if (Route::has('login'))
+                  @auth
+                    <td>
+                      <a href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">Удалить</a>
+                      <a href="{{route('status.edit', $status)}}" rel="nofollow">Изменинить</a>
+                    </td>
+                  @endif
+                @endif
             </tr>
         @endforeach
     </tbody>

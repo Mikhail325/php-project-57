@@ -12,7 +12,11 @@
         <th scope="col">Автор</th>
         <th scope="col">Исполнитель</th>
         <th scope="col">Дата создания</th>
-        <th scope="col">Действия</th>
+        @if (Route::has('login'))
+          @auth
+            <th scope="col">Действия</th>
+          @endif
+        @endif
       </tr>
     </thead>
     <tbody>
@@ -25,7 +29,14 @@
                 <td>{{$task->name}}</td>
                 <td>{{$task->userExecutor}}</td>
                 <td>{{$task->created_at}}</td>
-                <td><a href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">Удалить</a></td>
+                @if (Route::has('login'))
+                  @auth
+                    <td>
+                      <a href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">Удалить</a>
+                      <a href="{{route('task.edit', $task)}}" rel="nofollow">Изменинить</a>
+                    </td>
+                  @endif
+                @endif
             </tr>
         @endforeach
     </tbody>

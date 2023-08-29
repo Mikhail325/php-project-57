@@ -10,7 +10,11 @@
         <th scope="col">Id</th>
         <th scope="col">Имя</th>
         <th scope="col">Дата создания</th>
-        <th scope="col">Действия</th>
+        @if (Route::has('login'))
+          @auth
+            <th scope="col">Действия</th>
+          @endif
+      @endif
       </tr>
     </thead>
     <tbody>
@@ -19,7 +23,14 @@
                 <th scope="row">{{$label->id}}</th>
                 <td>{{$label->name}}</td>
                 <td>{{$label->created_at}}</td>
-                <td><a href="{{route('label.destroy', $label)}}" data-method="delete" rel="nofollow">Удалить</a></td>
+                @if (Route::has('login'))
+                  @auth
+                    <td>
+                      <a href="{{route('label.destroy', $label)}}" data-method="delete" rel="nofollow">Удалить</a>
+                      <a href="{{route('label.edit', $label)}}" rel="nofollow">Изменинить</a>
+                    </td>
+                  @endif
+                @endif
             </tr>
         @endforeach
     </tbody>
