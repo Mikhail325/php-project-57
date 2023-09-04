@@ -5,8 +5,8 @@
 <div>
   {{ Form::model($status, ['route' => 'status.store']) }}
     {{ Form::label('name', 'Название') }}
-    {{ Form::text('name') }}<br>
-    {{ Form::submit('Создать') }}
+    {{ Form::text('name', '', ['class' => 'form-control']) }}<br>
+    {{ Form::submit('Создать', ['class' => 'btn btn-primary']) }}
   {{ Form::close() }}
 </div>
 @endsection

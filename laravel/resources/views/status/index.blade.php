@@ -3,7 +3,13 @@
 @section('content')
 <h1 class="mt-5 mb-5">Статусы</h1>
 <div>
-  <a href="{{route('status.create')}}">Создать</a>
+  @if (Route::has('login'))
+    @auth
+      <a href="{{route('status.create')}}">Создать</a>
+    @endif
+  @endif
+</div>
+<div>
   <table class="table table-success table-striped">
     <thead>
       <tr>

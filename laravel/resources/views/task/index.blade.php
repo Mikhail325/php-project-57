@@ -3,6 +3,13 @@
 @section('content')
 <h1 class="mt-5 mb-5">Задачи</h1>
 <div>
+  @if (Route::has('login'))
+          @auth
+          <a href="{{route('task.create')}}">Создать</a>
+          @endif
+        @endif
+</div>
+<div>
   <table class="table table-success table-striped">
     <thead>
       <tr>
@@ -20,7 +27,6 @@
       </tr>
     </thead>
     <tbody>
-      <a href="{{route('task.create')}}">Создать</a>
         @foreach ($tasks as $task)
             <tr>
                 <th scope="row">{{$task->id}}</th>
