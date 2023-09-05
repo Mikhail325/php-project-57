@@ -1,9 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Изменение статуса</h1>
+<h1 class="mt-5 mb-5">Изменение метки</h1>
 <div>
-  {{ Form::model($status, ['route' => ['status.update', $status], 'method' => 'PATCH']) }}
+  {{ Form::model($label, ['route' => ['label.update', $label], 'method' => 'PATCH']) }}
       @if ($errors->any())
       <div>
           <ul>
@@ -13,10 +13,11 @@
           </ul>
       </div>
     @endif
-
     {{ Form::label('name', 'Название') }}
-    {{ Form::text('name') }}<br>
-    {{ Form::submit('Обновить') }}
+    {{ Form::text('name', $label->name, ['class' => 'form-control']) }}<br>
+    {{ Form::label('description', 'Описание') }}
+    {{ Form::text('description', $label->description, ['class' => 'form-control']) }}<br>
+    {{ Form::submit('Обновить', ['class' => 'btn btn-primary']) }}
   {{ Form::close() }}
 </div>
 @endsection

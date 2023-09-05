@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Создать статус</h1>
+<h1 class="mt-5 mb-5">Создать метку</h1>
 <div>
   {{ Form::model($labels, ['route' => 'label.store']) }}
     {{ Form::label('name', 'Название') }}

@@ -4,10 +4,10 @@
 <h1 class="mt-5 mb-5">Задачи</h1>
 <div>
   @if (Route::has('login'))
-          @auth
-          <a href="{{route('task.create')}}">Создать</a>
-          @endif
-        @endif
+    @auth
+      <a href="{{route('task.create')}}">Создать</a>
+    @endif
+  @endif
 </div>
 <div>
   <table class="table table-success table-striped">
@@ -30,10 +30,10 @@
         @foreach ($tasks as $task)
             <tr>
                 <th scope="row">{{$task->id}}</th>
-                <td>{{$task->status}}</td>
+                <td>{{$task->status->name}}</td>
                 <td>{{$task->name}}</td>
-                <td>{{$task->name}}</td>
-                <td>{{$task->userExecutor}}</td>
+                <td>{{$task->userAuthor->name}}</td>
+                <td>{{$task->userExecutor->name}}</td>
                 <td>{{$task->created_at}}</td>
                 @if (Route::has('login'))
                   @auth

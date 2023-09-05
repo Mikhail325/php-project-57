@@ -54,7 +54,6 @@ class TaskController extends Controller
         $task->save();
         
         $task->labels()->attach($label);
-        dd($task->labels);
         // При ошибках сохранения возникнет исключение
         
 
@@ -76,7 +75,10 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::findOrFail($id);
-        return view('task.edit', compact('task'));
+        $statuses = Status::all();
+        $users = User::all();
+        $labels = Label::all();
+        return view('task.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
     /**
@@ -88,13 +90,21 @@ class TaskController extends Controller
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
-            'name' => 'required|unique:statuses,name,' . $task->id, //--------------------dobavit
+            'name' => 'required|unique:tasks,name,' . $task->id, //--------------------dobavit
+            'description' => 'required|required:tasks,description' . $task->id,
+            'status_id' => 'required|integer:tasks,status_id' . $task->id,
+            'user_executor_id' => 'required|integer:tasks,user_executor_id' . $task->id,
+            'label' => '',
         ]);
+        $label = $data['label'];
+        unset($data['label']);
 
         $task->fill($data);
+        $task->user_author_id = Auth::id();
         $task->save();
-        return redirect()
-            ->route('task.index');
+
+        $task->labels()->sync($label);
+        return redirect()->route('task.index');
     }
 
     /**

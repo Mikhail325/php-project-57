@@ -27,4 +27,8 @@ class Task extends Model
         return $this->belongsTo(User::class, 'user_executor_id', 'id');
     }
 
+    public function userAuthor()
+    {
+        return $this->belongsTo(User::class, 'user_author_id', 'id');
+    }
 }

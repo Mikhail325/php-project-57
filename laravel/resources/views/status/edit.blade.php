@@ -13,10 +13,9 @@
           </ul>
       </div>
     @endif
-
     {{ Form::label('name', 'Название') }}
-    {{ Form::text('name') }}<br>
-    {{ Form::submit('Обновить') }}
+    {{ Form::text('name', $status->name, ['class' => 'form-control']) }}<br>
+    {{ Form::submit('Обновить', ['class' => 'btn btn-primary']) }}
   {{ Form::close() }}
 </div>
 @endsection
