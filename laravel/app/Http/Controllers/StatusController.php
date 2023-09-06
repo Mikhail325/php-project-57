@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Status;
 use Illuminate\Http\Request;
+use App\Models\Task;
 
 class StatusController extends Controller
 {
@@ -60,10 +61,15 @@ class StatusController extends Controller
     public function destroy($id)
     {
         $status = status::find($id);
-    if ($status) {
-      $status->delete();
-    }
-    flash('Статус успешно удален')->success();
-    return redirect()->route('status.index');
+        $statuses = Task::where('status_id', $id)->first();
+
+        if (empty($statuses)) {
+            $status->delete();
+            flash('Статус успешно удален')->success();
+            return redirect()->route('status.index');
+        }
+
+        flash('Не удалось удалить статус')->error();
+        return redirect()->route('status.index');
     }
 }
