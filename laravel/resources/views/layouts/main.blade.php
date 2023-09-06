@@ -13,7 +13,7 @@
 <body>
     <header>
         <div class="container-fluid">   
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
                 <a class="navbar-brand" href="/">Менеджер задач</a>
                 <div class="navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
@@ -30,7 +30,10 @@
                 </div>
                     @if (Route::has('login'))
                             @auth
-                                <form method="POST" action="{{ route('logout') }}">
+                                <form method="POST" class="flex items-center lg:order-2" action="{{ route('logout') }}">
+                                    <p style="margin-bottom: -; margin-bottom: 0px; margin-right: 6px;">
+                                        {{ Auth::user()->name }}
+                                    </p> 
                                     @csrf
                                     <a href="route('logout')"
                                             onclick="event.preventDefault();

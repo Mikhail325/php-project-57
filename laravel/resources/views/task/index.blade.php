@@ -1,8 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Задачи</h1>
+<div class="container">
+  @include('flash::message')
+</div>
 <div>
+  <h1 class="mt-5 mb-5">Задачи</h1>
   @if (Route::has('login'))
     @auth
       <a href="{{route('task.create')}}">Создать</a>
@@ -31,7 +34,7 @@
             <tr>
                 <th scope="row">{{$task->id}}</th>
                 <td>{{$task->status->name}}</td>
-                <td>{{$task->name}}</td>
+                <td><a href="{{route('task.show', $task)}}" rel="nofollow">{{$task->name}}</a></td>
                 <td>{{$task->userAuthor->name}}</td>
                 <td>{{$task->userExecutor->name}}</td>
                 <td>{{$task->created_at}}</td>

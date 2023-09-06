@@ -44,7 +44,7 @@ class TaskController extends Controller
             'user_executor_id' => 'required|integer',
             'label' => '',
         ]);
-        $label = $data['label'];
+        $label = $data['label'] ?? [];
         unset($data['label']);
 
         $task = new Task();
@@ -56,7 +56,7 @@ class TaskController extends Controller
         $task->labels()->attach($label);
         // При ошибках сохранения возникнет исключение
         
-
+        flash('Задача успешно создана')->success();
         // Редирект на указанный маршрут
         return redirect()->route('task.index');
     }
@@ -66,7 +66,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        
+        $task = Task::findOrFail($id);
+        return view('task.show', compact('task'));
     }
 
     /**
@@ -96,7 +97,7 @@ class TaskController extends Controller
             'user_executor_id' => 'required|integer:tasks,user_executor_id' . $task->id,
             'label' => '',
         ]);
-        $label = $data['label'];
+        $label = $data['label'] ?? [];
         unset($data['label']);
 
         $task->fill($data);
@@ -104,6 +105,7 @@ class TaskController extends Controller
         $task->save();
 
         $task->labels()->sync($label);
+        flash('Задача успешно обновлена')->success();
         return redirect()->route('task.index');
     }
 
@@ -116,6 +118,7 @@ class TaskController extends Controller
         if ($task) {
             $task->delete();
         }
+        flash('Задача успешно удалена')->success();
         return redirect()->route('task.index');
     }
 }

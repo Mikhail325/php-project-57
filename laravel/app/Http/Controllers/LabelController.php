@@ -41,6 +41,7 @@ class LabelController extends Controller
         // При ошибках сохранения возникнет исключение
         $labels->save();
     
+        flash('Метка успешно создана')->success();
         // Редирект на указанный маршрут
         return redirect()->route('label.index');
     }
@@ -69,8 +70,8 @@ class LabelController extends Controller
 
         $label->fill($data);
         $label->save();
-        return redirect()
-            ->route('label.index');
+        flash('Метка успешно изменена')->success();
+        return redirect()->route('label.index');
     }
 
     /**
@@ -82,6 +83,7 @@ class LabelController extends Controller
         if ($label) {
           $label->delete();
         }
+        flash('Метка успешно удалена')->success();
         return redirect()->route('label.index');
     }
 }

@@ -27,9 +27,9 @@
     </div>
     <div class="col-sm-3">
       {{ Form::label('label[]', 'Метки') }}<br>
-      {{ Form::select('label[]', $labels->pluck('name', 'id'), null, ['multiple' => true, 'class' => 'form-select']) }}
+      {{ Form::select('label[]', $labels->pluck('name', 'id'), $task->labels, ['multiple' => true, 'class' => 'form-select']) }}
     </div>
-    {{ Form::submit('Создать', ['class' => 'btn btn-primary']) }}
+    {{ Form::submit('Изменинить', ['class' => 'btn btn-primary']) }}
   {{ Form::close() }}
 </div>
 @endsection

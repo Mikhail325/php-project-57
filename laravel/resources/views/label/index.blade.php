@@ -1,8 +1,11 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Метки</h1>
+<div class="container">
+  @include('flash::message')
+</div>
 <div>
+  <h1 class="mt-5 mb-5">Метки</h1>
   @if (Route::has('login'))
     @auth
       <a href="{{route('label.create')}}">Создать</a>

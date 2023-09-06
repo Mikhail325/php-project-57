@@ -31,7 +31,7 @@ class StatusController extends Controller
         $status->fill($data);
         // При ошибках сохранения возникнет исключение
         $status->save();
-
+        flash('Статус успешно создан')->success();
         // Редирект на указанный маршрут
         return redirect()->route('status.index');
     }
@@ -53,8 +53,8 @@ class StatusController extends Controller
 
         $status->fill($data);
         $status->save();
-        return redirect()
-            ->route('status.index');
+        flash('Статус успешно изменен')->success();
+        return redirect()->route('status.index');
     }
 
     public function destroy($id)
@@ -63,6 +63,7 @@ class StatusController extends Controller
     if ($status) {
       $status->delete();
     }
+    flash('Статус успешно удален')->success();
     return redirect()->route('status.index');
     }
 }
