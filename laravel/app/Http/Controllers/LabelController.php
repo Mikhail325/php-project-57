@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
+use App\Models\LabelTask;
 use Illuminate\Http\Request;
 
 class LabelController extends Controller
@@ -80,10 +81,15 @@ class LabelController extends Controller
     public function destroy($id)
     {
         $label = Label::find($id);
-        if ($label) {
-          $label->delete();
+        $labels = LabelTask::where('label_id', $id)->first();
+
+        if (empty($labels)) {
+            $label->delete();
+            flash('Метка успешно удалена')->success();
+            return redirect()->route('label.index');
         }
-        flash('Метка успешно удалена')->success();
+
+        flash('Не удалось удалить метку')->error();
         return redirect()->route('label.index');
     }
 }
