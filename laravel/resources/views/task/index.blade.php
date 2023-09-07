@@ -12,6 +12,16 @@
     @endif
   @endif
 </div>
+<div class="col-sm-10">  
+  {{ Form::open(['class' => 'form', 'route' => 'task.index', 'method' => 'get'])}}
+  <div class="row">
+      {{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}<br>
+      {{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}<br>
+      {{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}<br>
+      {{ Form::submit('Фильтровать', ['class' => 'btn btn-primary']) }}
+  {{ Form::close() }}
+</div>
+</div> 
 <div>
   <table class="table table-success table-striped">
     <thead>
@@ -50,5 +60,8 @@
         @endforeach
     </tbody>
   </table>
+</div>
+<div>
+  {{ $tasks->links() }}
 </div>
 @endsection
