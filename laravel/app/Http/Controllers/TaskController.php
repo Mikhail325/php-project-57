@@ -13,12 +13,15 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class, 'Task');
+    }
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {   
-        $this->authorize('viewAny', Auth::class);
         $filters = $request->input('filter');
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([

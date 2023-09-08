@@ -4,14 +4,14 @@ namespace App\Policies;
 
 use App\Models\Status;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Auth;
 
 class StatusPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
@@ -19,7 +19,7 @@ class StatusPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Status $status): bool
+    public function view(?User $user, Status $status): bool
     {
         return true;
     }
