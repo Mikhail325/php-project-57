@@ -8,10 +8,6 @@ use App\Models\Task;
 
 class StatusController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Status::class, 'status');
-    }
 
     public function index()
     {

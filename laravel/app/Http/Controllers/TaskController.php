@@ -13,10 +13,10 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Task::class, 'Task');
-    }
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Task::class, 'task');
+    // }
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +29,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('user_author_id'),
                 AllowedFilter::exact('user_executor_id'),
                 ])
-            ->paginate(1);
+            ->paginate(5);
         $statuses = Status::all();
         $users = User::all();
         return view('task.index', compact('tasks', 'statuses', 'users'));
