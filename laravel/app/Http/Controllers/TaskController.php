@@ -22,7 +22,6 @@ class TaskController extends Controller
      */
     public function index(Request $request)
     {   
-        $filters = $request->input('filter');
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
@@ -54,7 +53,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:tasks', //--------------------dobavit
+            'name' => 'required|unique:tasks', //--------------------добавить валидоцию описания до 255 символов
             'description' => 'required|required',
             'status_id' => 'required|integer',
             'user_executor_id' => 'required|integer',
@@ -108,7 +107,7 @@ class TaskController extends Controller
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => 'required|unique:tasks,name,' . $task->id, //--------------------dobavit
-            'description' => 'required|required:tasks,description' . $task->id,
+            'description' => 'required|required:tasks,description' . $task->id, //--------------------добавить валидоцию описания до 255 символов
             'status_id' => 'required|integer:tasks,status_id' . $task->id,
             'user_executor_id' => 'required|integer:tasks,user_executor_id' . $task->id,
             'label' => '',

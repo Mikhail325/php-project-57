@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Label;
 use App\Models\LabelTask;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class LabelController extends Controller
 {
@@ -13,7 +14,9 @@ class LabelController extends Controller
      */
     public function index()
     {
-        $labels = Label::all();
+        $labels = QueryBuilder::for(Label::class)
+        ->orderBy('id', 'desc')
+        ->paginate(9);
         return view('label.index', compact('labels'));
     }
 

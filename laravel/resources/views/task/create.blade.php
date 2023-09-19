@@ -2,9 +2,9 @@
 
 @section('content')  
       {{ Form::open(['class' => 'form', 'route' => 'task.store', 'method' => 'POST'])}}
-      <div class="row">
+      <div class="row mt-5 mb-3">
         <div class="col-10">
-          <h1 class="mt-5 mb-5">Создать статус</h1>
+          <h1>Создать статус</h1>
         </div>
         <div class="col-2 d-flex align-self-center justify-content-end">
           <a class="btn btn-secondary" href="{{route('task.index')}}">Отменить</a>

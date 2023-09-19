@@ -46,24 +46,28 @@
       
     </div>
   @endforeach
-  {{ $tasks->links() }}
+  <div class="row d-flex justify-content-between">
+    <div class="col-7">
+      {{ $tasks->links() }}
+    </div>
+    <div class="col-2 d-flex align-self-center justify-content-end">
+        @can('create', App\Models\Task::class)
+          <a class="btn btn-primary" style="width: 125.7px" href="{{route('task.create')}}">Создать</a>
+        @endcan
+    </div>
+  </div>
 @endsection
 
 @section('title')
 <div class="row">
   <div class="col-10">
-    <h1 class="mt-5 mb-5">Задачи</h1>
-  </div>
-  <div class="col-2 d-flex align-self-center justify-content-end">
-    @can('create', App\Models\Task::class)
-      <a class="btn btn-primary" href="{{route('task.create')}}">Создать</a>
-    @endcan
+    <h1 class="mt-5 mb-3">Задачи</h1>
   </div>
 </div>
 @endsection
 
 @section('filter')
-<div class="my-3"> 
+<div class="mb-3"> 
   {{ Form::open(['class' => 'form', 'route' => 'task.index', 'method' => 'get'])}}
   <div class="row  "> 
       <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>

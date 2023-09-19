@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class StatusController extends Controller
 {
 
     public function index()
     {
-        $statuses = Status::all();
+        $statuses = QueryBuilder::for(Status::class)
+        ->orderBy('id', 'desc')
+        ->paginate(9);
         return view('status.index', compact('statuses'));
     }
 
