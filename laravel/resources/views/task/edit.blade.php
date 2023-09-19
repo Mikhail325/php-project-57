@@ -1,35 +1,38 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="mt-5 mb-5">Изменение статуса</h1>
-<div>
-  {{ Form::model($task, ['route' => ['task.update', $task], 'method' => 'PATCH']) }}
-  <div class="row">
-    <div class="col-sm-7">  
-      @if ($errors->any())
-      <div>
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
-      </div>
-    @endif
-    <div class="col-sm-7">  
-      {{ Form::label('name', 'Название') }}<br>
-      {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
-      {{ Form::label('description', 'Описание') }}<br>
-      {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
-      {{ Form::label('status_id', 'Статус') }}<br>
-      {{ Form::select('status_id', $statuses->pluck('name', 'id'), null, ['class' => 'form-control']) }}<br>
-      {{ Form::label('user_executor_id', 'Исполнитель') }}<br>
-      {{ Form::select('user_executor_id', $users->pluck('name', 'id'), null, ['class' => 'form-control']) }}<br>
-    </div>
-    <div class="col-sm-3">
-      {{ Form::label('label[]', 'Метки') }}<br>
-      {{ Form::select('label[]', $labels->pluck('name', 'id'), $task->labels, ['multiple' => true, 'class' => 'form-select']) }}
-    </div>
-    {{ Form::submit('Изменинить', ['class' => 'btn btn-primary']) }}
-  {{ Form::close() }}
+{{ Form::open(['class' => 'form', 'route' => ['task.update', $task], 'method' => 'PATCH'])}}
+<div class="row">
+  <div class="col-10">
+    <h1 class="mt-5 mb-5">Изменение задачи</h1>
+  </div>
+  <div class="col-2 d-flex align-self-center justify-content-end">
+    <a class="btn btn-secondary" href="{{route('task.index')}}">Отменить</a>
+    {{ Form::submit('Изменить', ['class' => 'btn btn-primary mx-1.5']) }}
+  </div>
+</div>
+<div class="col-10 ">  
+  @if ($errors->any())
+    @foreach ($errors->all() as $error)
+            <div class="m-1">{{ $error }}</div>
+    @endforeach
+  @endif
+</div>
+<div class="row square border border-light bg-slate-100 rounded p-3 d-flex justify-content-center">
+  <div class="col-9 ps-0">  
+    {{ Form::label('name', 'Название') }}<br>
+    {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
+    {{ Form::label('description', 'Описание') }}<br>
+    {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
+    {{ Form::label('user_executor_id', 'Исполнитель') }}<br>
+    {{ Form::select('user_executor_id', $users->pluck('name', 'id'), $task->userExecutor->id, ['class' => 'form-control']) }}
+  </div>
+  <div class="col-3 pe-0">
+    {{ Form::label('label[]', 'Метки') }}<br>
+    {{ Form::select('label[]', $labels->pluck('name', 'id'), $task->labels, ['multiple' => true, 'class' => 'form-select', 'style' => 'height: 21.25rem;']) }}<br>
+    {{ Form::label('status_id', 'Статус') }}<br>
+    {{ Form::select('status_id', $statuses->pluck('name', 'id'), $task->status->id, ['class' => 'form-control']) }}
+  </div>
+{{ Form::close() }}
 </div>
 @endsection

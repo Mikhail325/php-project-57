@@ -1,26 +1,38 @@
 @extends('layouts.main')
 
-@section('content')
-  <div class="col-sm-10">  
-      <h1 class="mt-5 mb-5">Создать статус</h1>  
+@section('content')  
       {{ Form::open(['class' => 'form', 'route' => 'task.store', 'method' => 'POST'])}}
       <div class="row">
-        <div class="col-sm-7">  
+        <div class="col-10">
+          <h1 class="mt-5 mb-5">Создать статус</h1>
+        </div>
+        <div class="col-2 d-flex align-self-center justify-content-end">
+          <a class="btn btn-secondary" href="{{route('task.index')}}">Отменить</a>
+          {{ Form::submit('Создать', ['class' => 'btn btn-primary mx-1.5']) }}
+        </div>
+      </div>
+      <div class="col-10">  
+        @if ($errors->any())
+          @foreach ($errors->all() as $error)
+            <div class="m-1">{{ $error }}</div>
+          @endforeach
+        @endif
+      </div>
+      <div class="row square border border-light bg-slate-100 rounded p-2 d-flex justify-content-center">
+        <div class="col-9">  
           {{ Form::label('name', 'Название') }}<br>
           {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
           {{ Form::label('description', 'Описание') }}<br>
           {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
-          {{ Form::label('status_id', 'Статус') }}<br>
-          {{ Form::select('status_id', $statuses->pluck('name', 'id'), null, ['class' => 'form-control']) }}<br>
           {{ Form::label('user_executor_id', 'Исполнитель') }}<br>
-          {{ Form::select('user_executor_id', $users->pluck('name', 'id'), null, ['class' => 'form-control']) }}<br>
+          {{ Form::select('user_executor_id', $users->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
         </div>
-        <div class="col-sm-3">
+        <div class="col-3">
           {{ Form::label('label[]', 'Метки') }}<br>
-          {{ Form::select('label[]', $labels->pluck('name', 'id'), null, ['multiple' => true, 'class' => 'form-select']) }}
+          {{ Form::select('label[]', $labels->pluck('name', 'id'), $task->labels, ['multiple' => true, 'class' => 'form-select', 'style' => 'height: 21.25rem;']) }}<br>
+          {{ Form::label('status_id', 'Статус') }}<br>
+          {{ Form::select('status_id', $statuses->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
         </div>
-        {{ Form::submit('Создать', ['class' => 'btn btn-primary']) }}
       {{ Form::close() }}
     </div>
-  </div> 
 @endsection

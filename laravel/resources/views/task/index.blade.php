@@ -1,88 +1,52 @@
 @extends('layouts.main')
 
 @section('content')
-  
-    @foreach ($tasks as $task)
+  @foreach ($tasks as $task)
       <div>
-      @switch($task->status->name)
-        @case('новый')
-            <div class="square shadow-sm bg-blue-600 rounded my-3">
-            @break
-      
-        @case('в работе')
-            <div class="square shadow-sm bg-pink-600 rounded my-3">
-            @break
+        <x-task-status-badge status="{{$task->status->name}}"/>
 
-        @case('на тестировании')
-            <div class="square shadow-sm bg-amber-400 rounded my-3">
-            @break
+        <div class="square border border-light bg-slate-100 hover:bg-gray-300 rounded ms-1 position-relative">
+          <div class="row ">
+            <div class="col-10 position-relative">
+              <div class="row">
 
-        @case('завершен')
-            <div class="square shadow-sm bg-green-500 rounded my-3">
-            @break
-      
-        @default
-            <div class="square shadow-sm bg-violet-600 rounded my-3">
-      @endswitch
-        
-        <div class="square border border-light bg-slate-100 hover:bg-gray-300 rounded ms-1">
-          <div class="row">
+                <div class="col-5 d-flex">
+                  <p class="p-2 m-0 align-self-center">
+                    {{$task->id}}
+                    <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('task.show', $task)}}" rel="nofollow">{{$task->name}}</a>
+                  </p>
+                </div>
 
-            <div class="col-5 d-flex position-relative">
-              <p class="p-2 m-0 align-self-center">
-                {{$task->id}}
-                <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('task.show', $task)}}" rel="nofollow">{{$task->name}}</a>
-              </p>
-            </div>
+                <div class="col-2 d-inline-flex align-self-center justify-content-center">
+                  <x-task-status status="{{$task->status->name}}"/>
+                </div>
 
-            @switch($task->status->name)
-              @case('новый')
-                <div class="col-1 d-inline-flex align-self-center justify-content-center text-blue-600 border-1 border-blue-600 bg-blue-100 rounded-pill px-2">
-                @break
-      
-              @case('в работе')
-                <div class="col-1 d-inline-flex align-self-center justify-content-center text-pink-600 border-1 border-pink-600 bg-pink-100 rounded-pill px-2">
-                @break
-
-              @case('на тестировании')
-                <div class="col-1 d-inline-flex align-self-center justify-content-center text-amber-600 border-1 border-amber-600 bg-amber-100 rounded-pill px-2">
-                @break
-
-              @case('завершен')
-                <div class="col-1 d-inline-flex align-self-center justify-content-center text-green-600 border-1 border-green-600 bg-green-100 rounded-pill px-2">
-                @break
-      
-              @default
-                <div class="col-1 d-inline-flex align-self-center justify-content-center text-violet-600 border-1 border-violet-600 bg-violet-100 rounded-pill px-2">
-            @endswitch
-              <p class="m-0 text-center lh-1">{{$task->status->name}}</p>
-            </div>
-
-            <div class="col-3">
-              <p class="p-2 m-0 pb-0">Автор: {{$task->userAuthor->name}}</p>
-              <p class="p-2 m-0 pt-0">Исполнитель: {{$task->userExecutor->name}}</p>
-            </div>
-
-            <div class="col-3 d-flex align-items-end flex-column-reverse">
-              <div class="p-2 pt-0 m-0">
-                <p class="m-0 text-secondary">{{$task->created_at}}</p>
+                <div class="col-5">
+                  <p class="p-2 m-0 pb-0">Автор: {{$task->userAuthor->name}}</p>
+                  <p class="p-2 m-0 pt-0">Исполнитель: {{$task->userExecutor->name}}</p>
+                </div>
               </div>
-            @can('create', App\Models\Task::class)
-              <div class="p-2 pb-0 top-0 end-0">
-                <a class="text-secondary p-0.5" href="{{route('task.create', $task)}}"><i class="bi bi-pencil hover:text-black"></i></a>
-                <a class="text-secondary p-0.5" href="{{route('task.create', $task)}}"><i class="bi bi-trash hover:text-black"></i></a>
+            </div>
+            <div class="col-2">
+              <div class="col-12 d-flex align-items-end flex-column-reverse">
+                @can('create', App\Models\Task::class)
+                  <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
+                    <a class="text-secondary p-0.5" href="{{route('task.edit', $task)}}"><i class="bi bi-pencil hover:text-black"></i></a>
+                    <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
+                      <i class="bi bi-trash hover:text-black"></i>
+                    </a>
+                  </div>
+                @endcan
               </div>
-            @endcan
             </div>
           </div>
-        </div>
-        
+            <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->created_at}}</p>
         </div>
       </div>
-      @endforeach
-  
+      
+    </div>
+  @endforeach
   {{ $tasks->links() }}
-</div>
 @endsection
 
 @section('title')
@@ -110,3 +74,25 @@
   {{ Form::close() }}
 </div>
 @endsection
+
+@foreach ($tasks as $task)
+<div class="modal fade" id="taskDeleteModal{{$task->id}}" tabindex="-1" role="dealog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие на странице</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Вы уверены что хотите удалить задачу
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Отменить</button>
+        <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">Удалить</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach

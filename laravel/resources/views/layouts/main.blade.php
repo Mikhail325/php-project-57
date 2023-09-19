@@ -4,7 +4,6 @@
 <body>
     <x-nav-task-manager></x-nav-task-manager>
     <div class="container">
-        
 
         @include('flash::message')
 
