@@ -5,7 +5,7 @@
   @include('flash::message')
 </div>
 @foreach ($statuses as $status)
-<div class="row justify-content-center m-2.5">
+<div class="row m-2.5">
         <div class="col-6 square border border-light bg-slate-100 hover:bg-gray-300 rounded ms-1">
           <div class="row d-flex justify-content-between">
             <div class="col-6">
@@ -20,10 +20,12 @@
                     <div class="col-10 d-flex align-self-center justify-content-end">
                       <p class="text-secondary m-0">{{$status->created_at}}</p>
                     </div>
-                    @can('create', App\Models\Status::class)
+                    @can('create', App\Models\TaskStatus::class)
                     <div class="col-2 p-0">
                         <a class="text-secondary" href="{{route('status.edit', $status)}}"><i class="bi bi-pencil hover:text-black"></i></a>
-                        <a class="text-secondary" href="{{route('status.index', $status)}}"><i class="bi bi-x-lg hover:text-black"></i></a>  
+                        <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#statusDeleteModal{{$status->id}}">
+                          <i class="bi bi-trash hover:text-black"></i>
+                        </a>
                     </div>
                     @endcan
                 </div>
@@ -38,7 +40,7 @@
     {{ $statuses->links() }}
   </div>
   <div class="col-2 d-flex align-self-center justify-content-end">
-      @can('create', App\Models\Status::class)
+      @can('create', App\Models\TaskStatus::class)
         <a class="btn btn-primary" style="width: 125.7px" href="{{route('status.create')}}">Создать</a>
       @endcan
   </div>
@@ -54,3 +56,24 @@
 </div>
 @endsection
 
+@foreach ($statuses as $status)
+<div class="modal fade" id="statusDeleteModal{{$status->id}}" tabindex="-1" role="dealog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие на странице</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Вы уверены что хотите удалить задачу
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Отменить</button>
+        <a class="btn btn-primary" href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">Удалить</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach

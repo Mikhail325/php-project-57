@@ -6,20 +6,6 @@
     <div class="col-4">
       <h1 class="">Создать статус</h1>
     </div>
-    <div class="col-4 d-flex align-items-center">
-      <div class="row square border border-light bg-slate-100 hover:bg-gray-300 rounded p-2">
-        <div class="col-3 d-flex align-items-center">
-        {{ Form::label('name', 'Название') }}
-        </div>
-        <div class="col-9">
-        {{ Form::text('name', '', ['class' => 'form-control']) }}
-        </div>
-      </div>
-    </div>
-    <div class="col-3 d-flex align-self-center justify-content-end">
-      <a class="btn btn-secondary" href="{{route('status.index')}}">Отменить</a>
-      {{ Form::submit('Создать', ['class' => 'btn btn-primary mx-1.5']) }}
-    </div>
   </div>
   @if ($errors->any())
   <div>
@@ -30,5 +16,21 @@
       </ul>
   </div>
 @endif
+<div class="col-4 d-flex align-items-center">
+  <div class="row square border border-light bg-slate-100 hover:bg-gray-300 rounded py-2 ms-0">
+    <div class="col-3 d-flex align-items-center">
+    {{ Form::label('name', 'Название') }}
+    </div>
+    <div class="col-9">
+    {{ Form::text('name', '', ['class' => 'form-control']) }}
+    </div>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-3">
+  <a class="btn btn-secondary" href="{{route('status.index')}}">Отменить</a>
+  {{ Form::submit('Создать', ['class' => 'btn btn-primary mx-1.5']) }}
+  </div>
+</div>
   {{ Form::close() }}
 @endsection

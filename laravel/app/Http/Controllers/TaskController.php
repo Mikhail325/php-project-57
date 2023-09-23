@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Status;
+use App\Models\TaskStatus;
 use App\Models\Task;
 use App\Models\User;
 use App\Models\Label;
@@ -13,10 +13,10 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Task::class, 'task');
-    // }
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class, 'task');
+    }
     /**
      * Display a listing of the resource.
      */
@@ -30,7 +30,7 @@ class TaskController extends Controller
                 ])
             ->orderBy('id', 'desc')
             ->paginate(5);
-        $statuses = Status::all();
+        $statuses = TaskStatus::all();
         $users = User::all();
         return view('task.index', compact('tasks', 'statuses', 'users'));
     }
@@ -41,7 +41,7 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        $statuses = Status::all();
+        $statuses = TaskStatus::all();
         $users = User::all();
         $labels = Label::all();
         return view('task.create', compact('task', 'statuses', 'users', 'labels'));
@@ -79,19 +79,17 @@ class TaskController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        $task = Task::findOrFail($id);
         return view('task.show', compact('task'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        $task = Task::findOrFail($id);
-        $statuses = Status::all();
+        $statuses = TaskStatus::all();
         $users = User::all();
         $labels = Label::all();
         return view('task.edit', compact('task', 'statuses', 'users', 'labels'));
@@ -100,9 +98,8 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        $task = Task::findOrFail($id);
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
@@ -127,12 +124,9 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        $task = Task::find($id);
-        if ($task) {
-            $task->delete();
-        }
+        $task->delete();
         flash('Задача успешно удалена')->success();
         return redirect()->route('task.index');
     }

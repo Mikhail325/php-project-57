@@ -18,7 +18,7 @@
                             @can('create', App\Models\Task::class)
                             <a class="text-secondary me-1" href="{{route('task.edit', $task)}}"><i class="bi bi-pencil hover:text-black"></i></a>
                             @endcan
-                            <a class="text-secondary" href="{{route('task.index', $task)}}"><i class="bi bi-x-lg hover:text-black"></i></a>
+                            <a class="text-secondary" href="{{route('task.index')}}"><i class="bi bi-x-lg hover:text-black"></i></a>
                         </div>
                     </div>
                 </div>

@@ -27,7 +27,9 @@
                     @can('create', App\Models\Label::class)
                     <div class="col-2 p-0">
                         <a class="text-secondary" href="{{route('label.edit', $label)}}"><i class="bi bi-pencil hover:text-black"></i></a>
-                        <a class="text-secondary" href="{{route('label.index', $label)}}"><i class="bi bi-x-lg hover:text-black"></i></a>  
+                        <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#labelDeleteModal{{$label->id}}">
+                          <i class="bi bi-trash hover:text-black"></i>
+                        </a> 
                     </div>
                     @endcan
                 </div>
@@ -57,3 +59,25 @@
   </div>
 </div>
 @endsection
+
+@foreach ($labels as $label)
+<div class="modal fade" id="labelDeleteModal{{$label->id}}" tabindex="-1" role="dealog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие на странице</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Вы уверены что хотите удалить задачу
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Отменить</button>
+        <a class="btn btn-primary" href="{{route('label.destroy', $label)}}" data-method="delete" rel="nofollow">Удалить</a>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach

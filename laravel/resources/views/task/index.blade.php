@@ -13,7 +13,7 @@
                 <div class="col-5 d-flex">
                   <p class="p-2 m-0 align-self-center">
                     {{$task->id}}
-                    <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('task.show', $task)}}" rel="nofollow">{{$task->name}}</a>
+                    <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('task.show', $task)}}">{{$task->name}}</a>
                   </p>
                 </div>
 

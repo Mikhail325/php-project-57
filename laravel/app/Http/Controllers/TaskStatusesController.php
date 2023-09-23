@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Status;
+use App\Models\TaskStatus;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class StatusController extends Controller
+class TaskStatusesController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(TaskStatus::class, 'taskStatus');
+    }
 
     public function index()
     {
-        $statuses = QueryBuilder::for(Status::class)
+        $statuses = QueryBuilder::for(TaskStatus::class)
         ->orderBy('id', 'desc')
         ->paginate(9);
         return view('status.index', compact('statuses'));
@@ -20,7 +24,7 @@ class StatusController extends Controller
 
     public function create()
     {
-        $status = new Status();
+        $status = new TaskStatus();
         return view('status.create', compact('status'));
     }
 
@@ -30,7 +34,7 @@ class StatusController extends Controller
             'name' => 'required|unique:statuses',
         ]);
 
-        $status = new Status();
+        $status = new TaskStatus();
         // Заполнение статьи данными из формы
         $status->fill($data);
         // При ошибках сохранения возникнет исключение
@@ -40,15 +44,16 @@ class StatusController extends Controller
         return redirect()->route('status.index');
     }
 
-    public function edit($id)
+    public function edit(TaskStatus $taskStatus)
     {
-        $status = Status::findOrFail($id);
+        $status = $taskStatus;
         return view('status.edit', compact('status'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, TaskStatus $taskStatus)
     {
-        $status = Status::findOrFail($id);
+        $id = $taskStatus->id;
+        $status = TaskStatus::findOrFail($id);
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
@@ -61,9 +66,11 @@ class StatusController extends Controller
         return redirect()->route('status.index');
     }
 
-    public function destroy($id)
+    public function destroy(TaskStatus $taskStatus)
     {
-        $status = status::find($id);
+        $id = $taskStatus->id;
+
+        $status = TaskStatus::find($id);
         $statuses = Task::where('status_id', $id)->first();
 
         if (empty($statuses)) {

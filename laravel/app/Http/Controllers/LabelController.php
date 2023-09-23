@@ -9,6 +9,11 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class LabelController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Label::class, 'label');
+    }
+    
     /**
      * Display a listing of the resource.
      */
@@ -53,17 +58,17 @@ class LabelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Label $label)
     {
-        $label = Label::findOrFail($id);
         return view('label.edit', compact('label'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Label $label)
     {
+        $id = $label->id;
         $label = Label::findOrFail($id);
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
@@ -81,8 +86,9 @@ class LabelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Label $label)
     {
+        $id = $label->id;
         $label = Label::find($id);
         $labels = LabelTask::where('label_id', $id)->first();
 
