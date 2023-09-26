@@ -56,7 +56,7 @@ class TaskController extends Controller
             'name' => 'required|unique:tasks', //--------------------добавить валидоцию описания до 255 символов
             'description' => 'required|required',
             'status_id' => 'required|integer',
-            'user_executor_id' => 'required|integer',
+            'assigned_to_id' => 'required|integer',
             'label' => '',
         ]);
         $label = $data['label'] ?? [];
@@ -65,7 +65,7 @@ class TaskController extends Controller
         $task = new Task();
         // Заполнение статьи данными из формы
         $task->fill($data);
-        $task->user_author_id = Auth::id();
+        $task->created_by_id = Auth::id();
         $task->save();
         
         $task->labels()->attach($label);
@@ -106,14 +106,14 @@ class TaskController extends Controller
             'name' => 'required|unique:tasks,name,' . $task->id, //--------------------dobavit
             'description' => 'required|required:tasks,description' . $task->id, //--------------------добавить валидоцию описания до 255 символов
             'status_id' => 'required|integer:tasks,status_id' . $task->id,
-            'user_executor_id' => 'required|integer:tasks,user_executor_id' . $task->id,
+            'assigned_to_id' => 'required|integer:tasks,assigned_to_id' . $task->id,
             'label' => '',
         ]);
         $label = $data['label'] ?? [];
         unset($data['label']);
 
         $task->fill($data);
-        $task->user_author_id = Auth::id();
+        $task->created_by_id = Auth::id();
         $task->save();
 
         $task->labels()->sync($label);

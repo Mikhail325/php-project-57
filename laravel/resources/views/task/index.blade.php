@@ -31,9 +31,13 @@
               <div class="col-12 d-flex align-items-end flex-column-reverse">
                 @can('create', App\Models\Task::class)
                   <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
-                    <a class="text-secondary p-0.5" href="{{route('task.edit', $task)}}"><i class="bi bi-pencil hover:text-black"></i></a>
+                    <a class="text-secondary p-0.5 link-underline link-underline-opacity-0" href="{{route('task.edit', $task)}}">
+                      <i class="bi bi-pencil hover:text-black"></i>
+                      <p class="d-none">Изменить</p>
+                    </a>
                     <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
                       <i class="bi bi-trash hover:text-black"></i>
+                      <p class="d-none">Удалить</p>
                     </a>
                   </div>
                 @endcan
@@ -84,7 +88,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие на странице</h1>
+        <h1 class="modal-title fs-5">Подтвердите действие на странице</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
       </div>
       <div class="modal-body">

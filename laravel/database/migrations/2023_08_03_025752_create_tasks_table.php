@@ -18,15 +18,15 @@ return new class extends Migration
 
             $table->unsignedBigInteger('status_id')->nullable();
             $table->index('status_id', 'task_status_idx');
-            $table->foreign('status_id', 'task_status_fk')->on('statuses')->references('id');
+            $table->foreign('status_id', 'task_status_fk')->on('task_statuses')->references('id');
 
-            $table->unsignedBigInteger('user_author_id')->nullable();
-            $table->index('user_author_id', 'task_user_author_idx');
-            $table->foreign('user_author_id', 'task_user_author_fk')->on('users')->references('id');
+            $table->unsignedBigInteger('created_by_id')->nullable();
+            $table->index('created_by_id', 'task_created_by_idx');
+            $table->foreign('created_by_id', 'task_created_by_fk')->on('users')->references('id');
 
-            $table->unsignedBigInteger('user_executor_id')->nullable();
-            $table->index('user_executor_id', 'task_user_executor_idx');
-            $table->foreign('user_executor_id', 'task_user_executor_fk')->on('users')->references('id');
+            $table->unsignedBigInteger('assigned_to_id')->nullable();
+            $table->index('assigned_to_id', 'task_assigned_to_idx');
+            $table->foreign('assigned_to_id', 'task_assigned_to_fk')->on('users')->references('id');
 
             $table->timestamps();
             $table->softDeletes();

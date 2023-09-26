@@ -24,11 +24,11 @@ class Task extends Model
 
     public function userExecutor()
     {
-        return $this->belongsTo(User::class, 'user_executor_id', 'id');
+        return $this->belongsTo(User::class, 'assigned_to_id', 'id');
     }
 
     public function userAuthor()
     {
-        return $this->belongsTo(User::class, 'user_author_id', 'id');
+        return $this->belongsTo(User::class, 'created_by_id', 'id');
     }
 }

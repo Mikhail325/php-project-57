@@ -24,8 +24,8 @@
           {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
           {{ Form::label('description', 'Описание') }}<br>
           {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
-          {{ Form::label('user_executor_id', 'Исполнитель') }}<br>
-          {{ Form::select('user_executor_id', $users->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
+          {{ Form::label('assigned_to_id', 'Исполнитель') }}<br>
+          {{ Form::select('assigned_to_id', $users->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
         </div>
         <div class="col-3">
           {{ Form::label('label[]', 'Метки') }}<br>

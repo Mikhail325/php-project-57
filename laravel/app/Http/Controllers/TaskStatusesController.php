@@ -31,7 +31,7 @@ class TaskStatusesController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:statuses',
+            'name' => 'required|unique:task_statuses',
         ]);
 
         $status = new TaskStatus();
@@ -57,7 +57,7 @@ class TaskStatusesController extends Controller
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
-            'name' => 'required|unique:statuses,name,' . $status->id,
+            'name' => 'required|unique:task_statuses,name,' . $status->id,
         ]);
 
         $status->fill($data);
