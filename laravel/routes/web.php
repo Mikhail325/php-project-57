@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('main');
-});
+})->name('main');;
 
 Route::get('/tasks', [TaskController::class, 'index'])->name('task.index');
 Route::get('/tasks/create', [TaskController::class, 'create'])->name('task.create');

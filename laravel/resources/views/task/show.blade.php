@@ -37,8 +37,8 @@
             </div>
             <div class="row">
                 <div class="col-8">
-                    <p class="m-0">Автор: {{$task->userAuthor->name}}</p>
-                    <p class="m-0">Исполнитель: {{$task->userExecutor->name}}</p>
+                    <p class="m-0">{{__('messages.Author')}}: {{$task->userAuthor->name}}</p>
+                    <p class="m-0">{{__('messages.Executor')}}: {{$task->userExecutor->name}}</p>
                   </div>
             </div>
             <p class="text-secondary position-absolute bottom-0 end-0 p-2 m-0">{{$task->created_at}}</p>

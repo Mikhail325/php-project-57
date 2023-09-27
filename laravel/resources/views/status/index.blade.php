@@ -22,9 +22,13 @@
                     </div>
                     @can('create', App\Models\TaskStatus::class)
                     <div class="col-2 p-0">
-                        <a class="text-secondary" href="{{route('status.edit', $status)}}"><i class="bi bi-pencil hover:text-black"></i></a>
+                        <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('status.edit', $status)}}">
+                          <i class="bi bi-pencil hover:text-black"></i>
+                          <p class="d-none">{{__('messages.To change')}}</p>
+                        </a>
                         <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#statusDeleteModal{{$status->id}}">
                           <i class="bi bi-trash hover:text-black"></i>
+                          <p class="d-none">{{__('messages.Delete')}}</p>
                         </a>
                     </div>
                     @endcan
@@ -41,7 +45,7 @@
   </div>
   <div class="col-2 d-flex align-self-center justify-content-end">
       @can('create', App\Models\TaskStatus::class)
-        <a class="btn btn-primary" style="width: 125.7px" href="{{route('status.create')}}">Создать</a>
+        <a class="btn btn-primary" style="width: 125.7px" href="{{route('status.create')}}">{{__('messages.Create')}}</a>
       @endcan
   </div>
 </div>
@@ -51,7 +55,7 @@
 @section('title')
 <div class="row">
   <div class="col-10">
-    <h1 class="mt-5 mb-3">Статусы</h1>
+    <h1 class="mt-5 mb-3">{{__('messages.Statuses')}}</h1>
   </div>
 </div>
 @endsection
@@ -61,17 +65,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Подтвердите действие на странице</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">{{__('messages.Confirm the action on the page')}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
       </div>
       <div class="modal-body">
         <p>
-          Вы уверены что хотите удалить задачу
+          {{__('messages.Are you sure you want to delete the status')}}
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Отменить</button>
-        <a class="btn btn-primary" href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">Удалить</a>
+        <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
+        <a class="btn btn-primary" href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
       </div>
     </div>
   </div>

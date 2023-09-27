@@ -22,8 +22,8 @@
                 </div>
 
                 <div class="col-5">
-                  <p class="p-2 m-0 pb-0">Автор: {{$task->userAuthor->name}}</p>
-                  <p class="p-2 m-0 pt-0">Исполнитель: {{$task->userExecutor->name}}</p>
+                  <p class="p-2 m-0 pb-0">{{__('messages.Author')}}: {{$task->userAuthor->name}}</p>
+                  <p class="p-2 m-0 pt-0">{{__('messages.Executor')}}: {{$task->userExecutor->name}}</p>
                 </div>
               </div>
             </div>
@@ -33,11 +33,11 @@
                   <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
                     <a class="text-secondary p-0.5 link-underline link-underline-opacity-0" href="{{route('task.edit', $task)}}">
                       <i class="bi bi-pencil hover:text-black"></i>
-                      <p class="d-none">Изменить</p>
+                      <p class="d-none">{{__('messages.To change')}}</p>
                     </a>
                     <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
                       <i class="bi bi-trash hover:text-black"></i>
-                      <p class="d-none">Удалить</p>
+                      <p class="d-none">{{__('messages.Delete')}}</p>
                     </a>
                   </div>
                 @endcan
@@ -56,7 +56,7 @@
     </div>
     <div class="col-2 d-flex align-self-center justify-content-end">
         @can('create', App\Models\Task::class)
-          <a class="btn btn-primary" style="width: 125.7px" href="{{route('task.create')}}">Создать</a>
+          <a class="btn btn-primary" style="width: 125.7px" href="{{route('task.create')}}">{{__('messages.Create')}}</a>
         @endcan
     </div>
   </div>
@@ -65,7 +65,7 @@
 @section('title')
 <div class="row">
   <div class="col-10">
-    <h1 class="mt-5 mb-3">Задачи</h1>
+    <h1 class="mt-5 mb-3">{{__('messages.Task')}}</h1>
   </div>
 </div>
 @endsection
@@ -77,7 +77,9 @@
       <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>
       <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
       <div class="col-4">{{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
-      <div class="col-2 d-flex justify-content-end">{{ Form::submit('Фильтровать', ['class' => 'btn btn-primary']) }}</div>
+      <div class="col-2 d-flex justify-content-end">
+        {{ Form::submit(__('messages.Filter'), ['class' => 'btn btn-primary']) }}
+      </div>
   </div>
   {{ Form::close() }}
 </div>
@@ -88,17 +90,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">Подтвердите действие на странице</h1>
+        <h1 class="modal-title fs-5">{{__('messages.Confirm the action on the page')}}</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
       </div>
       <div class="modal-body">
         <p>
-          Вы уверены что хотите удалить задачу
+          {{__('messages.Are you sure you want to delete the task')}}
         </p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Отменить</button>
-        <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">Удалить</a>
+        <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
+        <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
       </div>
     </div>
   </div>
