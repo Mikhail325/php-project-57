@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Status;
+use App\Models\TaskStatus;
 
 class StatusSeeder extends Seeder
 {
@@ -14,9 +14,9 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        Status::firstOrCreate(['name' => 'новый']);
-        Status::firstOrCreate(['name' => 'в работе']);
-        Status::firstOrCreate(['name' => 'на тестировании']);
-        Status::firstOrCreate(['name' => 'завершен']);
+        TaskStatus::firstOrCreate(['name' => 'новый']);
+        TaskStatus::firstOrCreate(['name' => 'в работе']);
+        TaskStatus::firstOrCreate(['name' => 'на тестировании']);
+        TaskStatus::firstOrCreate(['name' => 'завершен']);
     }
 }
