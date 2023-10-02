@@ -1,20 +1,27 @@
-FROM richarvey/nginx-php-fpm:1.7.2
- 
-COPY . .
- 
-# Image config
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
- 
-# Laravel config
+FROM webdevops/php-nginx:8.1-alpine
+
+# Install Laravel framework system requirements (https://laravel.com/docs/8.x/deployment#optimizing-configuration-loading)
+RUN apk add oniguruma-dev postgresql-dev libxml2-dev
+RUN apk --no-cache update \
+    && apk add --no-cache autoconf g++ make \
+    postgresql-dev \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo_pgsql
+
+# Copy Composer binary from the Composer official Docker image
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+ENV WEB_DOCUMENT_ROOT /app/public
 ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
- 
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
- 
-CMD ["/start.sh"]
+WORKDIR /app
+COPY . .
+
+RUN composer install --no-interaction --optimize-autoloader --no-dev
+# Optimizing Configuration loading
+RUN php artisan config:cache
+# Optimizing Route loading
+RUN php artisan route:cache
+# Optimizing View loading
+RUN php artisan view:cache
+
+RUN chown -R application:application .
