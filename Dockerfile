@@ -1,4 +1,4 @@
-FROM nginx-php-fpm
+FROM tiredofit/nginx-php-fpm:alpine-8.2
 
 WORKDIR /app
 
