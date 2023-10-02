@@ -22,6 +22,9 @@
         <div class="col-9">
           {{ Form::label('name', __('messages.Title')) }}<br>
           {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
+          @error('name')
+            <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
           {{ Form::label('description', __('messages.Description')) }}<br>
           {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
           {{ Form::label('assigned_to_id', __('messages.Executor')) }}<br>
