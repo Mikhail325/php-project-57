@@ -35,6 +35,7 @@
                       <i class="bi bi-pencil hover:text-black"></i>
                       <p class="d-none">{{__('messages.To change')}}</p>
                     </a>
+                    <x-delete-modal text="task" :object="$task"/>
                     <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
                       <i class="bi bi-trash hover:text-black"></i>
                       <p class="d-none">{{__('messages.Delete')}}</p>
@@ -84,26 +85,3 @@
     {{ Form::close() }}
   </div>
 @endsection
-
-
-@foreach ($tasks as $task)
-  <div class="modal fade" id="taskDeleteModal{{$task->id}}" tabindex="-1" role="dealog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5">{{__('messages.Confirm the action on the page')}}</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            {{__('messages.Are you sure you want to delete the task')}}
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
-          <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
-        </div>
-      </div>
-    </div>
-  </div>
-@endforeach
