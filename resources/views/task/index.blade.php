@@ -71,38 +71,39 @@
 @endsection
 
 @section('filter')
-<div class="mb-3"> 
-  {{ Form::open(['class' => 'form', 'route' => 'task.index', 'method' => 'get'])}}
-  <div class="row  "> 
-      <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>
-      <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
-      <div class="col-4">{{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
-      <div class="col-2 d-flex justify-content-end">
-        {{ Form::submit(__('messages.Filter'), ['class' => 'btn btn-primary']) }}
-      </div>
+  <div class="mb-3"> 
+    {{ Form::open(['class' => 'form', 'route' => 'task.index', 'method' => 'get'])}}
+    <div class="row  "> 
+        <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>
+        <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
+        <div class="col-4">{{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
+        <div class="col-2 d-flex justify-content-end">
+          {{ Form::submit(__('messages.Filter'), ['class' => 'btn btn-primary']) }}
+        </div>
+    </div>
+    {{ Form::close() }}
   </div>
-  {{ Form::close() }}
-</div>
 @endsection
 
+
 @foreach ($tasks as $task)
-<div class="modal fade" id="taskDeleteModal{{$task->id}}" tabindex="-1" role="dealog" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5">{{__('messages.Confirm the action on the page')}}</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body">
-        <p>
-          {{__('messages.Are you sure you want to delete the task')}}
-        </p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
-        <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
+  <div class="modal fade" id="taskDeleteModal{{$task->id}}" tabindex="-1" role="dealog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5">{{__('messages.Confirm the action on the page')}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            {{__('messages.Are you sure you want to delete the task')}}
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
+          <a class="btn btn-primary" href="{{route('task.destroy', $task)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 @endforeach

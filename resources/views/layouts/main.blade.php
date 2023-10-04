@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-    <x-head-task-manager></x-nav-task-manager>
-<body>
-    <x-nav-task-manager></x-nav-task-manager>
-    <div class="container">
+    <x-head-task-manager/>
+    <body>
+        <x-nav-task-manager></x-nav-task-manager>
+        <div class="container">
 
-        @include('flash::message')
+            @include('flash::message')
 
-        @yield('title')
+            @yield('title')
 
-        @yield('filter')
+            @yield('filter')
 
-        @yield('content')
-    </div> 
-</body>
+            @yield('content')
+        </div> 
+    </body>
 </html>
