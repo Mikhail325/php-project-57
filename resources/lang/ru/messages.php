@@ -60,8 +60,8 @@ return [
     'The label was successfully deleted' => 'Метка успешно удалена',
     'Failed to delete label' => 'Не удалось удалить метку',
     'Status successfully created' => 'Статус успешно создан',
-    'Status successfully changed' => 'Статус успешно изменен',
-    'Status successfully deleted' => 'Статус успешно удален',
+    'Status successfully changed' => 'Статус успешно изменён',
+    'Status successfully deleted' => 'Статус успешно удалён',
     'Failed to delete status' => 'Не удалось удалить статус',
     'False authenticate' => 'Введите правильные имя пользователя и пароль',
 ];

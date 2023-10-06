@@ -30,11 +30,12 @@ class TaskStatusesController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'name' => 'Это обязательное поле'
+            'name.required' => 'Это обязательное поле',
+            'name.unique' => 'Статус с таким именем уже существует'
         ];
 
         $data = $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:task_statuses',
         ], $messages);
 
         $status = new TaskStatus();
@@ -56,11 +57,12 @@ class TaskStatusesController extends Controller
         $status = TaskStatus::findOrFail($id);
 
         $messages = [
-            'name' => 'Это обязательное поле'
+            'name.required' => 'Это обязательное поле',
+            'name.unique' => 'Статус с таким именем уже существует'
         ];
 
         $data = $this->validate($request, [
-            'name' => 'required:task_statuses,name,' . $status->id,
+            'name' => 'unique:task_statuses|required:task_statuses,name,' . $status->id,
         ], $messages);
 
         $status->fill($data);
