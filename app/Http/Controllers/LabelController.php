@@ -39,10 +39,14 @@ class LabelController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'name' => 'Это обязательное поле'
+          ];
+
         $data = $this->validate($request, [
             'name' => 'required',
             'description' => 'nullable',
-        ]);
+        ], $messages);
     
         $labels = new Label();
         // Заполнение статьи данными из формы
@@ -68,6 +72,10 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
+        $messages = [
+            'name' => 'Это обязательное поле'
+        ];
+
         $id = $label->id;
         $label = Label::findOrFail($id);
         $data = $this->validate($request, [
@@ -75,7 +83,7 @@ class LabelController extends Controller
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => 'required:labels,name,' . $label->id,
             'description' => 'nullable:labels,description,' . $label->id,
-        ]);
+        ], $messages);
 
         $label->fill($data);
         $label->save();

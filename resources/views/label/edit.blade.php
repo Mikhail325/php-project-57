@@ -2,24 +2,12 @@
 
 @section('content')
   {{ Form::model($label, ['route' => ['label.update', $label], 'method' => 'PATCH']) }}
-      <div class="row mt-5 mb-3">
-        <div class="col-4">
-          <h1>{{__('messages.Changing the label')}}</h1>
-        </div>
-      </div>
-      <div class="col-12">  
-        @if ($errors->any())
-          <div class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-              <div class="m-1">{{ $error }}</div>
-            @endforeach
-          </div>
-        @endif
-      </div>
       <div class="row m-0">
         <div class="col-9 square border border-light bg-slate-100 rounded p-3">
         {{ Form::label('name', __('messages.Title')) }}
-        {{ Form::text('name', $label->name, ['class' => 'form-control']) }}<br>
+        {{ Form::text('name', $label->name, ['class' => 'form-control']) }}
+        <x-input-error :messages="$errors->get('name')" class="m-0 px-3" />
+        <br>
         {{ Form::label('description', __('messages.Description')) }}
         {{ Form::textarea('description', $label->description, ['class' => 'form-control']) }}
         </div>
@@ -31,5 +19,12 @@
         </div>
       </div>
   {{ Form::close() }}
+@endsection
+
+@section('title')
+<div class="row">
+  <div class="col-10">
+    <h1 class="mt-5 mb-3">{{__('messages.Changing the label')}}</h1>
+  </div>
 </div>
 @endsection

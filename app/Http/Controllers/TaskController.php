@@ -54,13 +54,17 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'name' => 'Это обязательное поле',
+            'status_id' => 'Это обязательное поле',
+        ];
         $data = $this->validate($request, [
             'name' => 'required',
             'description' => 'nullable',
             'status_id' => 'required',
             'assigned_to_id' => 'required',
             'label' => '',
-        ]);
+        ], $messages);
         $label = $data['label'] ?? [];
         unset($data['label']);
 
@@ -102,13 +106,18 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        $messages = [
+            'name' => 'Это обязательное поле',
+            'status_id' => 'Это обязательное поле',
+        ];
+
         $data = $this->validate($request, [
             'name' => 'required:tasks,name,' . $task->id,
             'description' => 'nullable:tasks,description' . $task->id,
             'status_id' => 'required:tasks,status_id' . $task->id,
             'assigned_to_id' => 'required:tasks,assigned_to_id' . $task->id,
             'label' => '',
-        ]);
+        ], $messages);
         $label = $data['label'] ?? [];
         unset($data['label']);
 
