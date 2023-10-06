@@ -55,10 +55,10 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:tasks',
-            'description' => 'required|required',
-            'status_id' => 'required|integer',
-            'assigned_to_id' => 'required|integer',
+            'name' => 'required',
+            'description' => 'nullable',
+            'status_id' => 'required',
+            'assigned_to_id' => 'required',
             'label' => '',
         ]);
         $label = $data['label'] ?? [];
@@ -103,10 +103,10 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:tasks,name,' . $task->id,
-            'description' => 'required|required:tasks,description' . $task->id,
-            'status_id' => 'required|integer:tasks,status_id' . $task->id,
-            'assigned_to_id' => 'required|integer:tasks,assigned_to_id' . $task->id,
+            'name' => 'required:tasks,name,' . $task->id,
+            'description' => 'nullable:tasks,description' . $task->id,
+            'status_id' => 'required:tasks,status_id' . $task->id,
+            'assigned_to_id' => 'required:tasks,assigned_to_id' . $task->id,
             'label' => '',
         ]);
         $label = $data['label'] ?? [];

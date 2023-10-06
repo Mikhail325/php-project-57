@@ -40,8 +40,8 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:labels',
-            'description' => 'required|unique:labels',
+            'name' => 'required',
+            'description' => 'nullable',
         ]);
     
         $labels = new Label();
@@ -73,8 +73,8 @@ class LabelController extends Controller
         $data = $this->validate($request, [
             // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
             // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
-            'name' => 'required|unique:labels,name,' . $label->id,
-            'description' => 'required|unique:labels,description,' . $label->id,
+            'name' => 'required:labels,name,' . $label->id,
+            'description' => 'nullable:labels,description,' . $label->id,
         ]);
 
         $label->fill($data);
