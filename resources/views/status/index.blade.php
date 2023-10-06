@@ -22,8 +22,9 @@
                     <i class="bi bi-pencil hover:text-black"></i>
                     <p class="d-none">{{__('messages.To change')}}</p>
                   </a>
-                  <!--<x-delete-modal text="status" :object="$status"/>-->
-                  <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#statusDeleteModal{{$status->id}}">
+                  <!--<x-delete-modal text="status" :object="$status"/>
+                  <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#statusDeleteModal{{$status->id}}">-->
+                  <a class="btn btn-primary" href="{{route('status.destroy', $status)}}" data-method="delete" rel="nofollow">
                     <i class="bi bi-trash hover:text-black"></i>
                     <p class="d-none">{{__('messages.Delete')}}</p>
                   </a>
