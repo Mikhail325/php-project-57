@@ -34,6 +34,7 @@ return [
     'Create status' => 'Создать статус',
     'Create label' => 'Создать метку',
     'Create task' => 'Создать задачу',
+    'Create' => 'Создать',
     'Apply' => 'Применить',
     'Confirm the action on the page' => 'Подтвердите действие на странице',
     'Are you sure you want to delete the task' => 'Вы уверены что хотите удалить задачу',
