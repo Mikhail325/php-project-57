@@ -7,15 +7,15 @@
           <h1 class="">{{__('messages.Changing the label')}}</h1>
         </div>
       </div>
-      @if ($errors->any())
-      <div>
-          <ul>
-              @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-              @endforeach
-          </ul>
+      <div class="col-12">  
+        @if ($errors->any())
+          <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+              <div class="m-1">{{ $error }}</div>
+            @endforeach
+          </div>
+        @endif
       </div>
-      @endif
       <div class="row m-0">
         <div class="col-9 square border border-light bg-slate-100 rounded p-3">
         {{ Form::label('name', __('messages.Title')) }}
