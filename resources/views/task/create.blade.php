@@ -20,14 +20,14 @@
           {{ Form::select('status_id', $statuses->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
           <x-input-error :messages="$errors->get('status_id')" class="m-0 px-3" />
         </div>
-      {{ Form::close() }}
-    </div>
-    <div class="row mt-2">
-      <div class="col-3 p-0">
-      <a class="btn btn-secondary" href="{{route('task.index')}}">{{__('messages.Cancel')}}</a>
-      {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
       </div>
-    </div>
+        <div class="row mt-2">
+          <div class="col-3 p-0">
+          <a class="btn btn-secondary" href="{{route('task.index')}}">{{__('messages.Cancel')}}</a>
+          {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
+          </div>
+        </div>
+      {{ Form::close() }}
 @endsection
 
 @section('title')

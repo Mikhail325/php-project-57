@@ -28,7 +28,6 @@ class TaskController extends Controller
                 AllowedFilter::exact('user_author_id'),
                 AllowedFilter::exact('user_executor_id'),
                 ])
-            ->orderBy('id', 'desc')
             ->paginate(5);
 
         $statuses = TaskStatus::all();

@@ -17,7 +17,6 @@ class TaskStatusesController extends Controller
     public function index()
     {
         $statuses = QueryBuilder::for(TaskStatus::class)
-        ->orderBy('id', 'desc')
         ->paginate(9);
         return view('status.index', compact('statuses'));
     }

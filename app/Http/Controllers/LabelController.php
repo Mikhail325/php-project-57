@@ -20,7 +20,6 @@ class LabelController extends Controller
     public function index()
     {
         $labels = QueryBuilder::for(Label::class)
-        ->orderBy('id', 'desc')
         ->paginate(9);
         return view('label.index', compact('labels'));
     }
