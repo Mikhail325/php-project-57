@@ -9,8 +9,8 @@
                 <p>{{__("messages.Are you sure you want to delete the $text")}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">{{__('messages.Cancel')}}</button>
-                <a class="btn btn-primary" href="{{route($text . '.destroy', $object)}}" data-method="delete" rel="nofollow">{{__('messages.Delete')}}</a>
+                <button type="button" class="btn btn-primary">{{__('messages.No')}}</button>
+                <a class="btn btn-primary" href="{{route($text . '.destroy', $object)}}" data-method="delete" rel="nofollow">{{__('messages.Yes')}}</a>
             </div>
         </div>
     </div>

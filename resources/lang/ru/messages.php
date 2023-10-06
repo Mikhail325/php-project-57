@@ -31,6 +31,8 @@ return [
     'Executor' => 'Исполнитель',
     'To change' => 'Изменить',
     'Delete' => 'Удалить',
+    'No' => 'Нет',
+    'Yes' => 'Да',
     'Create status' => 'Создать статус',
     'Create label' => 'Создать метку',
     'Create task' => 'Создать задачу',

@@ -23,9 +23,5 @@
 @endsection
 
 @section('title')
-<div class="row">
-  <div class="col-10">
-    <h1 class="mt-5 mb-3">{{__('messages.Changing the status')}}</h1>
-  </div>
-</div>
+  <x-title-task-manager text="messages.Changing the status"/>
 @endsection
