@@ -15,8 +15,7 @@ class Task extends Model
 
     public function created_at() 
     {
-        return 
-            Carbon::parse($this->created_at)->format('d.m.Y');
+        return Carbon::parse($this->created_at)->format('d.m.Y');
     }
 
     public function status()

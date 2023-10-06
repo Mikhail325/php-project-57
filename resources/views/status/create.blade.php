@@ -4,7 +4,7 @@
   {{ Form::model($status, ['route' => 'status.store']) }}
   <div class="row mt-5 mb-3 d-flex justify-content-between">
     <div class="col-4">
-      <h1 class="">{{__('messages.Create a status')}}</h1>
+      <h1>{{__('messages.Create a status')}}</h1>
     </div>
   </div>
   <div class="col-12">  
