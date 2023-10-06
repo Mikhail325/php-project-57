@@ -31,7 +31,7 @@
                                 </form>
                             @else
                             <div>
-                                <a class="btn btn-primary" href="{{ route('login') }}" role="button">{{ __('messages.Log in') }}</a>
+                                <a class="btn btn-primary" href="{{ route('login') }}" role="button">{{ __('messages.Login') }}</a>
                                 <a class="btn btn-primary" href="{{ route('register') }}" role="button">{{ __('messages.Registration') }}</a>
                             </div>
                         @endauth
