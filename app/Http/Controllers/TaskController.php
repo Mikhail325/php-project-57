@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
-use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -31,7 +30,7 @@ class TaskController extends Controller
                 ])
             ->orderBy('id', 'desc')
             ->paginate(5);
-            
+
         $statuses = TaskStatus::all();
         $users = User::all();
 
@@ -56,7 +55,7 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $this->validate($request, [
-            'name' => 'required|unique:tasks', //--------------------добавить валидоцию описания до 255 символов
+            'name' => 'required|unique:tasks',
             'description' => 'required|required',
             'status_id' => 'required|integer',
             'assigned_to_id' => 'required|integer',
@@ -74,7 +73,7 @@ class TaskController extends Controller
         $task->labels()->attach($label);
         // При ошибках сохранения возникнет исключение
         
-        flash('Задача успешно создана')->success();
+        flash(__('messages.The task was successfully created'))->success();
         // Редирект на указанный маршрут
         return redirect()->route('task.index');
     }
@@ -104,10 +103,8 @@ class TaskController extends Controller
     public function update(Request $request, Task $task)
     {
         $data = $this->validate($request, [
-            // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
-            // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
-            'name' => 'required|unique:tasks,name,' . $task->id, //--------------------dobavit
-            'description' => 'required|required:tasks,description' . $task->id, //--------------------добавить валидоцию описания до 255 символов
+            'name' => 'required|unique:tasks,name,' . $task->id,
+            'description' => 'required|required:tasks,description' . $task->id,
             'status_id' => 'required|integer:tasks,status_id' . $task->id,
             'assigned_to_id' => 'required|integer:tasks,assigned_to_id' . $task->id,
             'label' => '',
@@ -120,7 +117,7 @@ class TaskController extends Controller
         $task->save();
 
         $task->labels()->sync($label);
-        flash('Задача успешно обновлена')->success();
+        flash(__('messages.The task has been successfully updated'))->success();
         return redirect()->route('task.index');
     }
 
@@ -130,7 +127,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        flash('Задача успешно удалена')->success();
+        flash(__('messages.The task was successfully deleted'))->success();
         return redirect()->route('task.index');
     }
 }

@@ -42,5 +42,16 @@ return [
     'Are you sure you want to delete the label' => 'Вы уверены что хотите удалить метку',
     'Changing the label' => 'Изменить метку',
     'Create a label' => 'Создать метку',
-    'Registration' => 'Регистрация'
+    'Registration' => 'Регистрация',
+    'The task has been successfully updated' => 'Задача успешно обновлена',
+    'The task was successfully created' => 'Задача успешно создана',
+    'The task was successfully deleted' => 'Задача успешно удалена',
+    'The label was created successfully' => 'Метка успешно создана',
+    'Label changed successfully' => 'Метка успешно изменена',
+    'The label was successfully deleted' => 'Метка успешно удалена',
+    'Failed to delete label' => 'Не удалось удалить метку',
+    'Status successfully created' => 'Статус успешно создан',
+    'Status successfully changed' => 'Статус успешно изменен',
+    'Status successfully deleted' => 'Статус успешно удален',
+    'Failed to delete status' => 'Не удалось удалить статус',
 ];

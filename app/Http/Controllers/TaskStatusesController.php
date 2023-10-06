@@ -35,12 +35,9 @@ class TaskStatusesController extends Controller
         ]);
 
         $status = new TaskStatus();
-        // Заполнение статьи данными из формы
         $status->fill($data);
-        // При ошибках сохранения возникнет исключение
         $status->save();
-        flash('Статус успешно создан')->success();
-        // Редирект на указанный маршрут
+        flash(__('messages.Status successfully created'))->success();
         return redirect()->route('status.index');
     }
 
@@ -55,14 +52,12 @@ class TaskStatusesController extends Controller
         $id = $taskStatus->id;
         $status = TaskStatus::findOrFail($id);
         $data = $this->validate($request, [
-            // У обновления немного измененная валидация. В проверку уникальности добавляется название поля и id текущего объекта
-            // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => 'required|unique:task_statuses,name,' . $status->id,
         ]);
 
         $status->fill($data);
         $status->save();
-        flash('Статус успешно изменен')->success();
+        flash(__('messages.Status successfully changed'))->success();
         return redirect()->route('status.index');
     }
 
@@ -75,11 +70,10 @@ class TaskStatusesController extends Controller
 
         if (empty($statuses)) {
             $status->delete();
-            flash('Статус успешно удален')->success();
+            flash(__('messages.Status successfully deleted'))->success();
             return redirect()->route('status.index');
         }
-
-        flash('Не удалось удалить статус')->error();
+        flash(__('messages.Failed to delete status'))->error();
         return redirect()->route('status.index');
     }
 }

@@ -50,7 +50,7 @@ class LabelController extends Controller
         // При ошибках сохранения возникнет исключение
         $labels->save();
     
-        flash('Метка успешно создана')->success();
+        flash(__('messages.The label was created successfully'))->success();
         // Редирект на указанный маршрут
         return redirect()->route('label.index');
     }
@@ -79,7 +79,7 @@ class LabelController extends Controller
 
         $label->fill($data);
         $label->save();
-        flash('Метка успешно изменена')->success();
+        flash(__('messages.Label changed successfully'))->success();
         return redirect()->route('label.index');
     }
 
@@ -94,11 +94,11 @@ class LabelController extends Controller
 
         if (empty($labels)) {
             $label->delete();
-            flash('Метка успешно удалена')->success();
+            flash(__('messages.The label was successfully deleted'))->success();
             return redirect()->route('label.index');
         }
 
-        flash('Не удалось удалить метку')->error();
+        flash(__('messages.Failed to delete label'))->error();
         return redirect()->route('label.index');
     }
 }
