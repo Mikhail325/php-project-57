@@ -55,9 +55,9 @@
     <div class="col-7">
       {{ $tasks->links() }}
     </div>
-    <div class="col-2 d-flex align-self-center justify-content-end">
+    <div class="col-3 d-flex align-self-center justify-content-end">
         @can('create', App\Models\Task::class)
-          <a class="btn btn-primary" style="width: 125.7px" href="{{route('task.create')}}">{{__('messages.Create')}}</a>
+          <a class="btn btn-primary" href="{{route('task.create')}}">{{__('messages.Create task')}}</a>
         @endcan
     </div>
   </div>

@@ -44,9 +44,9 @@
   <div class="col-7">
     {{ $statuses->links() }}
   </div>
-  <div class="col-2 d-flex align-self-center justify-content-end">
+  <div class="col-3 d-flex align-self-center justify-content-end">
       @can('create', App\Models\TaskStatus::class)
-        <a class="btn btn-primary" style="width: 125.7px" href="{{route('status.create')}}">{{__('messages.Create')}}</a>
+        <a class="btn btn-primary" href="{{route('status.create')}}">{{__('messages.Create status')}}</a>
       @endcan
   </div>
 </div>
