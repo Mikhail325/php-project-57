@@ -4,7 +4,7 @@
 {{ Form::model($labels, ['route' => 'label.store']) }}
   <div class="row mt-5 mb-3">
     <div class="col-4">
-      <h1 class="">{{__('messages.Create a label')}}</h1>
+      <h1>{{__('messages.Create a label')}}</h1>
     </div>
   </div>
   <div class="col-12">  

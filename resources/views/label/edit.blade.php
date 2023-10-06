@@ -4,7 +4,7 @@
   {{ Form::model($label, ['route' => ['label.update', $label], 'method' => 'PATCH']) }}
       <div class="row mt-5 mb-3">
         <div class="col-4">
-          <h1 class="">{{__('messages.Changing the label')}}</h1>
+          <h1>{{__('messages.Changing the label')}}</h1>
         </div>
       </div>
       <div class="col-12">  
