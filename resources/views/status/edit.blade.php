@@ -7,15 +7,15 @@
     <h1 class="">{{__('messages.Changing the status')}}</h1>
   </div>
 </div>
-@if ($errors->any())
-<div>
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
+<div class="col-12">  
+  @if ($errors->any())
+    <div class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <div class="m-1">{{ $error }}</div>
+      @endforeach
+    </div>
+  @endif
 </div>
-@endif
 <div class="col-4 d-flex align-items-center">
 <div class="row square border border-light bg-slate-100 hover:bg-gray-300 rounded py-2 ms-0">
   <div class="col-3 d-flex align-items-center">
