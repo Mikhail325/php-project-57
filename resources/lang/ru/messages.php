@@ -5,7 +5,7 @@ return [
     'Remember me' => 'Запомнить',
     'Email' => 'Email',
     'Log in' => 'Вход',
-    'Log Out' => 'Выйти',
+    'Log Out' => 'Выход',
     'Task Manager' => 'Менеджер задач',
     'Task' => 'Задачи',
     'Statuses' => 'Статусы',
