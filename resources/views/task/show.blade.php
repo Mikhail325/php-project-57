@@ -14,7 +14,7 @@
                         <div class="col-8 d-flex align-self-center justify-content-center pt-3">
                             <x-task-status status="{{$task->status->name}}"/>
                         </div>
-                        <div class="col-3">
+                        <div class="col-3 text-end pe-0">
                             @can('create', App\Models\Task::class)
                             <a class="text-secondary me-1" href="{{route('task.edit', $task)}}"><i class="bi bi-pencil hover:text-black"></i></a>
                             @endcan

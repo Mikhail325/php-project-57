@@ -11,20 +11,19 @@
           {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
         </div>
       </div>
-      <div class="col-10">  
+      <div class="col-12">  
         @if ($errors->any())
-          @foreach ($errors->all() as $error)
-            <div class="m-1">{{ $error }}</div>
-          @endforeach
+          <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+              <div class="m-1">{{ $error }}</div>
+            @endforeach
+          </div>
         @endif
       </div>
       <div class="row square border border-light bg-slate-100 rounded p-2 d-flex justify-content-center">
         <div class="col-9">
           {{ Form::label('name', __('messages.Title')) }}<br>
           {{ Form::text('name', $task->name, ['class' => 'form-control']) }}<br>
-          @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-          @enderror
           {{ Form::label('description', __('messages.Description')) }}<br>
           {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
           {{ Form::label('assigned_to_id', __('messages.Executor')) }}<br>
@@ -39,3 +38,4 @@
       {{ Form::close() }}
     </div>
 @endsection
+

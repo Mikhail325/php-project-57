@@ -11,11 +11,13 @@
     {{ Form::submit(__('messages.To change'), ['class' => 'btn btn-primary mx-1.5']) }}
   </div>
 </div>
-<div class="col-10 ">  
+<div class="col-12">  
   @if ($errors->any())
-    @foreach ($errors->all() as $error)
-            <div class="m-1">{{ $error }}</div>
-    @endforeach
+    <div class="alert alert-danger">
+      @foreach ($errors->all() as $error)
+        <div class="m-1">{{ $error }}</div>
+      @endforeach
+    </div>
   @endif
 </div>
 <div class="row square border border-light bg-slate-100 rounded p-3 d-flex justify-content-center">

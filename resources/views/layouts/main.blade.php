@@ -5,10 +5,10 @@
         <x-nav-task-manager></x-nav-task-manager>
         <div class="container">
 
-            @include('flash::message')
-
             @yield('title')
 
+            @include('flash::message')
+            
             @yield('filter')
 
             @yield('content')

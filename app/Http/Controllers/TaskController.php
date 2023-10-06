@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\QueryBuilder;
 use Spatie\QueryBuilder\AllowedFilter;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -30,8 +31,10 @@ class TaskController extends Controller
                 ])
             ->orderBy('id', 'desc')
             ->paginate(5);
+            
         $statuses = TaskStatus::all();
         $users = User::all();
+
         return view('task.index', compact('tasks', 'statuses', 'users'));
     }
 

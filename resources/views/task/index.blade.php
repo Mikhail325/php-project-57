@@ -45,7 +45,7 @@
               </div>
             </div>
           </div>
-            <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->created_at}}</p>
+            <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->created_at()}}</p>
         </div>
       </div>
       
@@ -79,7 +79,7 @@
         <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
         <div class="col-4">{{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
         <div class="col-2 d-flex justify-content-end">
-          {{ Form::submit(__('messages.Filter'), ['class' => 'btn btn-primary']) }}
+          {{ Form::submit(__('messages.Apply'), ['class' => 'btn btn-primary']) }}
         </div>
     </div>
     {{ Form::close() }}
