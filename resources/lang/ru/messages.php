@@ -58,4 +58,5 @@ return [
     'Status successfully changed' => 'Статус успешно изменен',
     'Status successfully deleted' => 'Статус успешно удален',
     'Failed to delete status' => 'Не удалось удалить статус',
+    'False authenticate' => 'Введите правильные имя пользователя и пароль',
 ];
