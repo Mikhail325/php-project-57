@@ -16,7 +16,7 @@
     <div class="row mt-2">
       <div class="col-3">
         <a class="btn btn-secondary" href="{{route('status.index')}}">{{__('messages.Cancel')}}</a>
-        {{ Form::submit(__('messages.To change'), ['class' => 'btn btn-primary mx-1.5']) }}
+        {{ Form::submit(__('messages.Edit'), ['class' => 'btn btn-primary mx-1.5']) }}
       </div>
     </div>
   {{ Form::close() }}
