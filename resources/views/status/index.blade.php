@@ -21,7 +21,7 @@
               </div>
               @can('create', App\Models\TaskStatus::class)
                 <div class="col-2 p-0">
-                  <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('status.edit', $status->id)}}">
+                  <a class="text-secondary link-underline link-underline-opacity-0" href="task_statuses/{{$status->id}}/edit">
                     <i class="bi bi-pencil hover:text-black"></i>
                     <p class="d-none">{{__('messages.To change')}}</p>
                   </a>                         
