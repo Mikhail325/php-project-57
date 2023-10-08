@@ -58,12 +58,11 @@ class TaskStatusesController extends Controller
         $status = TaskStatus::findOrFail($id);
 
         $messages = [
-            'name.required' => 'Это обязательное поле',
-            'name.unique' => 'Статус с таким именем уже существует'
+            'name.required' => 'Это обязательное поле'
         ];
 
         $data = $this->validate($request, [
-            'name' => 'unique:task_statuses|required:task_statuses,name,' . $status->id,
+            'name' => 'required:task_statuses,name,' . $status->id,
         ], $messages);
 
         $status->fill($data);

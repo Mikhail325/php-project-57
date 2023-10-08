@@ -36,7 +36,7 @@
                       <p class="d-none">{{__('messages.To change')}}</p>
                     </a>
                     <x-delete-modal text="tasks" :object="$task"/>
-                    <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
+                    <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#tasksDeleteModal{{$task->id}}">
                       <i class="bi bi-trash hover:text-black"></i>
                       <p class="d-none">{{__('messages.Delete')}}</p>
                     </a>

@@ -40,7 +40,7 @@ return [
     'Create' => 'Создать',
     'Apply' => 'Применить',
     'Confirm the action on the page' => 'Подтвердите действие на странице',
-    'Are you sure you want to delete the task' => 'Вы уверены что хотите удалить задачу',
+    'Are you sure you want to delete the tasks' => 'Вы уверены что хотите удалить задачу',
     'Cancel' => 'Отменить',
     'Create a task' => 'Создать задачу',
     'Title' => 'Название',

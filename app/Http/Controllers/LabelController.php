@@ -40,11 +40,12 @@ class LabelController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'name' => 'Это обязательное поле'
+            'name' => 'Это обязательное поле',
+            'name.unique' => 'Метка с таким именем уже существует'
           ];
 
         $data = $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:labels',
             'description' => 'nullable',
         ], $messages);
     

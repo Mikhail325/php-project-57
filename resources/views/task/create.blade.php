@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')  
-      {{ Form::open(['class' => 'form', 'route' => 'task.store', 'method' => 'POST'])}}
+      {{ Form::open(['class' => 'form', 'route' => 'tasks.store', 'method' => 'POST'])}}
       <div class="row square border border-light bg-slate-100 rounded p-2 d-flex justify-content-center">
         <div class="col-9">
           {{ Form::label('name', __('messages.Title')) }}<br>
@@ -23,7 +23,7 @@
       </div>
         <div class="row mt-2">
           <div class="col-3 p-0">
-          <a class="btn btn-secondary" href="{{route('task.index')}}">{{__('messages.Cancel')}}</a>
+          <a class="btn btn-secondary" href="{{route('tasks.index')}}">{{__('messages.Cancel')}}</a>
           {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
           </div>
         </div>
