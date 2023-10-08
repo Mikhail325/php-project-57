@@ -1,10 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<table class="table table-borderless">
   @foreach ($statuses as $status)
-  <tr>
-    <td class="p-0">
     <div class="row m-2.5">
       <div class="col-6 square border border-light bg-slate-100 hover:bg-gray-300 rounded ms-1">
         <div class="row d-flex justify-content-between">
@@ -36,8 +33,6 @@
         </div>    
       </div>
     </div>
-    </td>
-  </tr>  
   @endforeach
   <div class="row d-flex justify-content-between">
     <div class="col-7">
@@ -49,7 +44,9 @@
         @endcan
     </div>
   </div>
-</table>
+
+  <x-hexlet-stub-test :objects="$statuses"/>
+
 @endsection
 
 @section('title')
