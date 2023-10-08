@@ -53,7 +53,7 @@ return [
     'Changing the label' => 'Изменить метку',
     'Create a label' => 'Создать метку',
     'Registration' => 'Регистрация',
-    'The task has been successfully updated' => 'Задача успешно обновлена',
+    'The task has been successfully updated' => 'Задача успешно изменена',
     'The task was successfully created' => 'Задача успешно создана',
     'The task was successfully deleted' => 'Задача успешно удалена',
     'The label was created successfully' => 'Метка успешно создана',

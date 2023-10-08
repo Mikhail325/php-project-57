@@ -2,7 +2,7 @@
 
 @section('content')  
       {{ Form::open(['class' => 'form', 'route' => 'tasks.store', 'method' => 'POST'])}}
-      <div class="row square border border-light bg-slate-100 rounded p-2 d-flex justify-content-center">
+      <div class="row square border border-light bg-slate-100 rounded p-2 m-0 d-flex justify-content-center">
         <div class="col-9">
           {{ Form::label('name', __('messages.Title')) }}<br>
           {{ Form::text('name', $task->name, ['class' => 'form-control']) }}
@@ -21,12 +21,7 @@
           <x-input-error :messages="$errors->get('status_id')" class="m-0 px-3" />
         </div>
       </div>
-        <div class="row mt-2">
-          <div class="col-3 p-0">
-          <a class="btn btn-secondary" href="{{route('tasks.index')}}">{{__('messages.Cancel')}}</a>
-          {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
-          </div>
-        </div>
+      <x-button-form routes="tasks.Create" text="Edit"/>
       {{ Form::close() }}
 @endsection
 

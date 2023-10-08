@@ -12,12 +12,7 @@
       {{ Form::textarea('description', '', ['class' => 'form-control', 'style' => 'height: 21.25rem;']) }}
       </div>
     </div>
-    <div class="row mt-2">
-      <div class="col-3">
-      <a class="btn btn-secondary" href="{{route('labels.index')}}">{{__('messages.Cancel')}}</a>
-      {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
-      </div>
-    </div>
+    <x-button-form routes="labels.index" text="Create"/>
   {{ Form::close() }}
 @endsection
 

@@ -13,12 +13,7 @@
         </div>
       </div>
     </div>
-    <div class="row mt-2">
-      <div class="col-3">
-        <a class="btn btn-secondary" href="{{route('task_statuses.index')}}">{{__('messages.Cancel')}}</a>
-        {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
-      </div>
-    </div>
+    <x-button-form routes="task_statuses.index" text="Create"/>
   {{ Form::close() }}
 @endsection
 
