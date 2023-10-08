@@ -17,9 +17,7 @@ class TaskController extends Controller
     {
         $this->authorizeResource(Task::class);
     }
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request)
     {   
         $tasks = QueryBuilder::for(Task::class)
@@ -37,9 +35,6 @@ class TaskController extends Controller
         return view('task.index', compact('tasks', 'statuses', 'users'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $task = new Task();
@@ -49,9 +44,6 @@ class TaskController extends Controller
         return view('task.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $messages = [
@@ -65,34 +57,25 @@ class TaskController extends Controller
             'assigned_to_id' => 'required',
             'label' => '',
         ], $messages);
+        
         $label = $data['label'] ?? [];
         unset($data['label']);
 
         $task = new Task();
-        // Заполнение статьи данными из формы
         $task->fill($data);
         $task->created_by_id = Auth::id();
         $task->save();
-        
         $task->labels()->attach($label);
-        // При ошибках сохранения возникнет исключение
         
         flash(__('messages.The task was successfully created'))->success();
-        // Редирект на указанный маршрут
         return redirect()->route('tasks.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Task $task)
     {
         return view('task.show', compact('task'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Task $task)
     {
         $statuses = TaskStatus::all();
@@ -101,9 +84,6 @@ class TaskController extends Controller
         return view('task.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Task $task)
     {
         $messages = [
@@ -130,9 +110,6 @@ class TaskController extends Controller
         return redirect()->route('tasks.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Task $task)
     {
         $task->delete();

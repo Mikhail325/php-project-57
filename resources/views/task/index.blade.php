@@ -61,6 +61,17 @@
         @endcan
     </div>
   </div>
+
+  <table class="text-white">
+    @foreach ($tasks as $task)
+        <tr>
+            <td>{{$task->id}}</td>
+            <th>{{$task->name}}</th>
+            <th>{{$task->status->name}}</th>
+            <th>{{$task->created_at()}}</th>
+        </tr>
+    @endforeach
+  </table>
 @endsection
 
 @section('title')

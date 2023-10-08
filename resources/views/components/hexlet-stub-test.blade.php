@@ -1,4 +1,4 @@
-<table class="text-light">
+<table class="text-white">
     @foreach ($objects as $object)
         <tr>
             <td>
