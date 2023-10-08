@@ -47,11 +47,13 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $messages = [
-            'name' => 'Это обязательное поле',
+            'name.required' => 'Это обязательное поле',
+            'name.unique' => 'Задача с таким именем уже существует',
             'status_id' => 'Это обязательное поле',
+            'assigned_to_id' => 'Это обязательное поле',
         ];
         $data = $this->validate($request, [
-            'name' => 'required',
+            'name' => 'required|unique:tasks',
             'description' => 'nullable',
             'status_id' => 'required',
             'assigned_to_id' => 'required',

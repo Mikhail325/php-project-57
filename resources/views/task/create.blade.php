@@ -12,6 +12,7 @@
           {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
           {{ Form::label('assigned_to_id', __('messages.Executor')) }}<br>
           {{ Form::select('assigned_to_id', $users->pluck('name', 'id'), null, ['placeholder' => '------------', 'class' => 'form-control']) }}
+          <x-input-error :messages="$errors->get('assigned_to_id')" class="m-0 px-3" />
         </div>
         <div class="col-3">
           {{ Form::label('label[]', __('messages.Label')) }}<br>
