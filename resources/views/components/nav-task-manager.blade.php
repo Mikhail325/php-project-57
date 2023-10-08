@@ -12,7 +12,7 @@
                             <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('messages.Statuses') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('label.index') }}">{{ __('messages.Label') }}</a>
+                            <a class="nav-link" href="{{ route('labels.index') }}">{{ __('messages.Label') }}</a>
                         </li>
                     </ul>
                     @if (Route::has('login'))

@@ -11,7 +11,7 @@ class LabelController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Label::class, 'label');
+        $this->authorizeResource(Label::class);
     }
     
     /**
@@ -55,7 +55,7 @@ class LabelController extends Controller
     
         flash(__('messages.The label was created successfully'))->success();
         // Редирект на указанный маршрут
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -87,7 +87,7 @@ class LabelController extends Controller
         $label->fill($data);
         $label->save();
         flash(__('messages.Label changed successfully'))->success();
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 
     /**
@@ -102,10 +102,10 @@ class LabelController extends Controller
         if (empty($labels)) {
             $label->delete();
             flash(__('messages.The label was successfully deleted'))->success();
-            return redirect()->route('label.index');
+            return redirect()->route('labels.index');
         }
 
         flash(__('messages.Failed to delete label'))->error();
-        return redirect()->route('label.index');
+        return redirect()->route('labels.index');
     }
 }

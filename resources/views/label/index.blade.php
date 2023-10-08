@@ -26,11 +26,11 @@
                     </div>
                     @can('create', App\Models\Label::class)
                     <div class="col-2 p-0">
-                        <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('label.edit', $label)}}">
+                        <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('labels.edit', $label)}}">
                           <i class="bi bi-pencil hover:text-black "></i>
                           <p class="d-none">{{__('messages.To change')}}</p>
                         </a>
-                        <x-delete-modal text="label" :object="$label"/>
+                        <x-delete-modal text="labels" :object="$label"/>
                         <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#labelDeleteModal{{$label->id}}">
                           <i class="bi bi-trash hover:text-black"></i>
                           <p class="d-none">{{__('messages.Delete')}}</p>
@@ -50,7 +50,7 @@
   </div>
   <div class="col-3 d-flex align-self-center justify-content-end">
       @can('create', App\Models\Label::class)
-        <a class="btn btn-primary" href="{{route('label.create')}}">{{__('messages.Create label')}}</a>
+        <a class="btn btn-primary" href="{{route('labels.create')}}">{{__('messages.Create label')}}</a>
       @endcan
   </div>
 </div>

@@ -30,13 +30,7 @@ Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('task.upd
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 Route::resource('task_statuses', TaskStatusesController::class);
-
-Route::get('/labels', [LabelController::class, 'index'])->name('label.index');
-Route::get('/labels/create', [LabelController::class, 'create'])->name('label.create');
-Route::POST('/labels', [LabelController::class, 'store'])->name('label.store');
-Route::get('/labels/{label}/edit', [LabelController::class, 'edit'])->name('label.edit');
-Route::patch('/labels/{label}', [LabelController::class, 'update'])->name('label.update');
-Route::delete('/labels/{label}', [LabelController::class, 'destroy'])->name('label.destroy');
+Route::resource('labels', TaskStatusesController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
