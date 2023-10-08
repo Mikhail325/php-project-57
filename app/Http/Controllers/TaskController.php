@@ -23,8 +23,8 @@ class TaskController extends Controller
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
-                AllowedFilter::exact('user_author_id'),
-                AllowedFilter::exact('user_executor_id'),
+                AllowedFilter::exact('created_by_id'),
+                AllowedFilter::exact('assigned_to_id'),
                 ])
             ->orderBy('id')
             ->paginate(5);

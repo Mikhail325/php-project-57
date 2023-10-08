@@ -84,8 +84,8 @@
     {{ Form::open(['class' => 'form', 'route' => 'tasks.index', 'method' => 'get'])}}
     <div class="row  "> 
         <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>
-        <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
-        <div class="col-4">{{ Form::select('filter[user_executor_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
+        <div class="col-4">{{ Form::select('filter[created_by_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
+        <div class="col-4">{{ Form::select('filter[assigned_to_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Исполнитель', 'class' => 'form-control']) }}</div>
         <div class="col-2 d-flex justify-content-end">
           {{ Form::submit(__('messages.Apply'), ['class' => 'btn btn-primary']) }}
         </div>
