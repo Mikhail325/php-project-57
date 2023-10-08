@@ -35,8 +35,7 @@
                       <i class="bi bi-pencil hover:text-black"></i>
                       <p class="d-none">{{__('messages.To change')}}</p>
                     </a>
-                    <x-delete-modal text="tasks" :object="$task"/>
-                    <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#tasksDeleteModal{{$task->id}}">
+                    <a class="text-secondary p-0.5" href="{{route('tasks.destroy', $task)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
                       <i class="bi bi-trash hover:text-black"></i>
                       <p class="d-none">{{__('messages.Delete')}}</p>
                     </a>
@@ -69,6 +68,8 @@
             <th>{{$task->name}}</th>
             <th>{{$task->status->name}}</th>
             <th>{{$task->created_at()}}</th>
+            <th>{{$task->userAuthor->name}}</th>
+            <th>{{$task->userExecutor->name}}</th>
         </tr>
     @endforeach
   </table>
