@@ -30,7 +30,7 @@ Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('task.upd
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
 Route::resource('task_statuses', TaskStatusesController::class);
-Route::resource('labels', TaskStatusesController::class);
+Route::resource('labels', LabelController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

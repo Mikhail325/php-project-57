@@ -1,9 +1,6 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="container">
-  @include('flash::message')
-</div>
 @foreach ($labels as $label)
 <div class="row justify-content-center m-2.5">
         <div class="square border border-light bg-slate-100 hover:bg-gray-300 rounded ms-1">
@@ -30,8 +27,7 @@
                           <i class="bi bi-pencil hover:text-black "></i>
                           <p class="d-none">{{__('messages.To change')}}</p>
                         </a>
-                        <x-delete-modal text="labels" :object="$label"/>
-                        <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#labelDeleteModal{{$label->id}}">
+                        <a class="text-secondary p-0.5" href="{{route('labels.destroy', $label)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
                           <i class="bi bi-trash hover:text-black"></i>
                           <p class="d-none">{{__('messages.Delete')}}</p>
                         </a>
@@ -40,7 +36,6 @@
                 </div>
             </div>
           </div>
-            
         </div>
 </div>
 @endforeach
