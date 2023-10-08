@@ -21,7 +21,7 @@
           <x-input-error :messages="$errors->get('status_id')" class="m-0 px-3" />
         </div>
       </div>
-      <x-button-form routes="tasks.Create" text="Edit"/>
+      <x-button-form routes="tasks.index" text="Create"/>
       {{ Form::close() }}
 @endsection
 
