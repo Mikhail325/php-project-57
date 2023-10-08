@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  {{ Form::model($status, ['route' => 'status.store']) }}
+  {{ Form::model($status, ['route' => 'task_statuses.store']) }}
     <div class="col-4 d-flex align-items-center">
       <div class="row square border border-light bg-slate-100 hover:bg-gray-300 rounded py-2 ms-0">
         <div class="col-3 d-flex align-items-center">
@@ -15,7 +15,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-3">
-        <a class="btn btn-secondary" href="{{route('status.index')}}">{{__('messages.Cancel')}}</a>
+        <a class="btn btn-secondary" href="{{route('task_statuses.index')}}">{{__('messages.Cancel')}}</a>
         {{ Form::submit(__('messages.Create'), ['class' => 'btn btn-primary mx-1.5']) }}
       </div>
     </div>

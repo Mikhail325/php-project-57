@@ -9,7 +9,7 @@
                             <a class="nav-link" href="{{ route('task.index') }}">{{ __('messages.Task') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('status.index') }}">{{ __('messages.Statuses') }}</a>
+                            <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('messages.Statuses') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('label.index') }}">{{ __('messages.Label') }}</a>

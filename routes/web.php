@@ -29,12 +29,7 @@ Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('task.ed
 Route::patch('/tasks/{task}', [TaskController::class, 'update'])->name('task.update');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('task.destroy');
 
-Route::get('/task_statuses', [TaskStatusesController::class, 'index'])->name('status.index');
-Route::get('/task_statuses/create', [TaskStatusesController::class, 'create'])->name('status.create');
-Route::POST('/task_statuses', [TaskStatusesController::class, 'store'])->name('status.store');
-Route::get('/task_statuses/{taskStatus}/edit', [TaskStatusesController::class, 'edit'])->name('status.edit');
-Route::patch('/task_statuses/{taskStatus}', [TaskStatusesController::class, 'update'])->name('status.update');
-Route::delete('/task_statuses/{taskStatus}', [TaskStatusesController::class, 'destroy'])->name('status.destroy');
+Route::resource('task_statuses', TaskStatusesController::class);
 
 Route::get('/labels', [LabelController::class, 'index'])->name('label.index');
 Route::get('/labels/create', [LabelController::class, 'create'])->name('label.create');

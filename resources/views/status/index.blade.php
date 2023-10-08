@@ -21,11 +21,11 @@
               </div>
               @can('create', App\Models\TaskStatus::class)
                 <div class="col-2 p-0">
-                  <a class="text-secondary link-underline link-underline-opacity-0" href="task_statuses/{{$status->id}}/edit">
+                  <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('task_statuses.edit', $status)}}">
                     <i class="bi bi-pencil hover:text-black"></i>
                     <p class="d-none">{{__('messages.To change')}}</p>
                   </a>                         
-                  <a class="text-secondary p-0.5" href="{{route('status.destroy', $status)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
+                  <a class="text-secondary p-0.5" href="{{route('task_statuses.destroy', $status)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
                     <i class="bi bi-trash hover:text-black"></i>
                     <p class="d-none">{{__('messages.Delete')}}</p>
                   </a>
@@ -45,7 +45,7 @@
     </div>
     <div class="col-3 d-flex align-self-center justify-content-end">
         @can('create', App\Models\TaskStatus::class)
-          <a class="btn btn-primary" href="{{route('status.create')}}">{{__('messages.Create status')}}</a>
+          <a class="btn btn-primary" href="{{route('task_statuses.create')}}">{{__('messages.Create status')}}</a>
         @endcan
     </div>
   </div>

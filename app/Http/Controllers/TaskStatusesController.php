@@ -11,12 +11,13 @@ class TaskStatusesController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(TaskStatus::class, 'taskStatus');
+        $this->authorizeResource(TaskStatus::class);
     }
 
     public function index()
     {
         $statuses = QueryBuilder::for(TaskStatus::class)
+        ->orderBy('id')
         ->paginate(9);
         return view('status.index', compact('statuses'));
     }
@@ -42,7 +43,7 @@ class TaskStatusesController extends Controller
         $status->fill($data);
         $status->save();
         flash(__('messages.Status successfully created'))->success();
-        return redirect()->route('status.index');
+        return redirect()->route('task_statuses.index');
     }
 
     public function edit(TaskStatus $taskStatus)
@@ -68,7 +69,7 @@ class TaskStatusesController extends Controller
         $status->fill($data);
         $status->save();
         flash(__('messages.Status successfully changed'))->success();
-        return redirect()->route('status.index');
+        return redirect()->route('task_statuses.index');
     }
 
     public function destroy(TaskStatus $taskStatus)
@@ -81,9 +82,9 @@ class TaskStatusesController extends Controller
         if (empty($statuses)) {
             $status->delete();
             flash(__('messages.Status successfully deleted'))->success();
-            return redirect()->route('status.index');
+            return redirect()->route('task_statuses.index');
         }
         flash(__('messages.Failed to delete status'))->error();
-        return redirect()->route('status.index');
+        return redirect()->route('task_statuses.index');
     }
 }
