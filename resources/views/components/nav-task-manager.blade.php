@@ -6,7 +6,7 @@
                     <a class="navbar-brand" href="{{ route('main') }}">{{ __('messages.Task Manager') }}</a>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('task.index') }}">{{ __('messages.Task') }}</a>
+                            <a class="nav-link" href="{{ route('tasks.index') }}">{{ __('messages.Task') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('task_statuses.index') }}">{{ __('messages.Statuses') }}</a>

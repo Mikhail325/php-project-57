@@ -15,7 +15,7 @@ class TaskController extends Controller
 {
     public function __construct()
     {
-        $this->authorizeResource(Task::class, 'task');
+        $this->authorizeResource(Task::class);
     }
     /**
      * Display a listing of the resource.
@@ -28,6 +28,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('user_author_id'),
                 AllowedFilter::exact('user_executor_id'),
                 ])
+            ->orderBy('id')
             ->paginate(5);
 
         $statuses = TaskStatus::all();
@@ -78,7 +79,7 @@ class TaskController extends Controller
         
         flash(__('messages.The task was successfully created'))->success();
         // Редирект на указанный маршрут
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -126,7 +127,7 @@ class TaskController extends Controller
 
         $task->labels()->sync($label);
         flash(__('messages.The task has been successfully updated'))->success();
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 
     /**
@@ -136,6 +137,6 @@ class TaskController extends Controller
     {
         $task->delete();
         flash(__('messages.The task was successfully deleted'))->success();
-        return redirect()->route('task.index');
+        return redirect()->route('tasks.index');
     }
 }

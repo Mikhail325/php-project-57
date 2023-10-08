@@ -13,7 +13,7 @@
                 <div class="col-5 d-flex">
                   <p class="p-2 m-0 align-self-center">
                     {{$task->id}}
-                    <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('task.show', $task)}}">{{$task->name}}</a>
+                    <a class="p-2 m-0 stretched-link link-underline link-underline-opacity-0 text-dark" href="{{route('tasks.show', $task)}}">{{$task->name}}</a>
                   </p>
                 </div>
 
@@ -31,11 +31,11 @@
               <div class="col-12 d-flex align-items-end flex-column-reverse">
                 @can('create', App\Models\Task::class)
                   <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
-                    <a class="text-secondary p-0.5 link-underline link-underline-opacity-0" href="{{route('task.edit', $task)}}">
+                    <a class="text-secondary p-0.5 link-underline link-underline-opacity-0" href="{{route('tasks.edit', $task)}}">
                       <i class="bi bi-pencil hover:text-black"></i>
                       <p class="d-none">{{__('messages.To change')}}</p>
                     </a>
-                    <x-delete-modal text="task" :object="$task"/>
+                    <x-delete-modal text="tasks" :object="$task"/>
                     <a class="text-secondary p-0.5" href="#" data-bs-toggle="modal" data-bs-target="#taskDeleteModal{{$task->id}}">
                       <i class="bi bi-trash hover:text-black"></i>
                       <p class="d-none">{{__('messages.Delete')}}</p>
@@ -57,7 +57,7 @@
     </div>
     <div class="col-3 d-flex align-self-center justify-content-end">
         @can('create', App\Models\Task::class)
-          <a class="btn btn-primary" href="{{route('task.create')}}">{{__('messages.Create task')}}</a>
+          <a class="btn btn-primary" href="{{route('tasks.create')}}">{{__('messages.Create task')}}</a>
         @endcan
     </div>
   </div>
@@ -69,7 +69,7 @@
 
 @section('filter')
   <div class="mb-3"> 
-    {{ Form::open(['class' => 'form', 'route' => 'task.index', 'method' => 'get'])}}
+    {{ Form::open(['class' => 'form', 'route' => 'tasks.index', 'method' => 'get'])}}
     <div class="row  "> 
         <div class="col-2">{{ Form::select('filter[status_id]', $statuses->pluck('name', 'id'), null, ['placeholder' => 'Статус', 'class' => 'form-control']) }}</div>
         <div class="col-4">{{ Form::select('filter[user_author_id]', $users->pluck('name', 'id'), null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>

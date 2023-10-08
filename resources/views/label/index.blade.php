@@ -50,6 +50,7 @@
   </div>
 </div>
 
+<x-hexlet-stub-test :objects="$labels"/>
 @endsection
 
 @section('title')
