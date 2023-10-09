@@ -65,7 +65,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->fill($data);
-        $task->created_by_id = (integer) Auth::id();
+        $task->created_by_id = (int) Auth::id();
         $task->save();
         $task->labels()->attach($label);
 
@@ -104,7 +104,7 @@ class TaskController extends Controller
         unset($data['label']);
 
         $task->fill($data);
-        $task->created_by_id = (integer) Auth::id();
+        $task->created_by_id = (int) Auth::id();
         $task->save();
 
         $task->labels()->sync($label);
