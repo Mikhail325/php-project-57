@@ -1,10 +1,10 @@
 ### Hexlet tests and linter status:
 [![hexlet-check](https://github.com/Mikhail325/php-project-57/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Mikhail325/php-project-57/actions/workflows/hexlet-check.yml)
-
+[![testGit](https://github.com/Mikhail325/php-project-57/actions/workflows/github-actions.yml/badge.svg)](https://github.com/Mikhail325/php-project-57/actions/workflows/github-actions.yml)
 <a href="https://codeclimate.com/github/Mikhail325/php-project-57/maintainability"><img src="https://api.codeclimate.com/v1/badges/f0ecb7cea5d737580e40/maintainability" /></a>
 
 # Анализатор страниц
-Page Analyzer – сайт, который анализирует указанные страницы на SEO пригодность по аналогии с PageSpeed Insights
+Task Manager – система управления задачами, подобная http://www.redmine.org/. Она позволяет ставить задачи, назначать исполнителей и менять их статусы. Для работы с системой требуется регистрация и аутентификация.
 
 Пример реализации сайта: https://php-project-57-s33x.onrender.com/
 
@@ -15,7 +15,6 @@ Page Analyzer – сайт, который анализирует указанн
 * PostgreSQL >= 14.8;
 * Docker >= 24.0.
 
-
 ## Инструкции по установке
 
 С клонируйте репозиторий с GitHub и перейдите в директорию проекта используя команды:
@@ -23,19 +22,11 @@ Page Analyzer – сайт, который анализирует указанн
 git clone https://github.com/Mikhail325/php-project-57.git
 cd php-project-57
 ```
-### Подключения БД к приложению
-
-Заполните данные о БД в строку имеющий следующий формат:
-{provider}://{user}:{password}@{host}:{port}/{db}
-Выполните команду в терминале подставив получившуюся строку
-```
-export DATABASE_URL=postgresql://janedoe:mypassword@localhost:5432/mydb
-```
-
 ### Инструкции по установке c помощью GNU Make
 
 Для установки зависимостей используйте команду **make install**.
-Для запуска сайта используйте команду **make start**.
+Для сборки проэкта используйте команду **npm run build**.
+Для запуска сайта используйте команду **php artisan serve**.
 
 ### Инструкции по установке c помощью Docker
 
