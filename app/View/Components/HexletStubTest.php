@@ -8,11 +8,11 @@ use Illuminate\View\Component;
 
 class HexletStubTest extends Component
 {
-    public $objects;
+    public object $objects;
     /**
      * Create a new component instance.
      */
-    public function __construct($objects)
+    public function __construct(object $objects)
     {
         $this->objects = $objects;
     }

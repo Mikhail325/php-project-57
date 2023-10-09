@@ -8,6 +8,10 @@ use App\Models\LabelTask;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/**
+ * @property array $User
+ * @property array $Label
+ */
 class LabelControllerTest extends TestCase
 {
     use RefreshDatabase;
