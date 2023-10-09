@@ -1,1 +1,12 @@
+name: testGit
+on: push
 
+jobs:
+  myTest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instal
+        run : make install
+      - name: Run linter
+        run : make lint
