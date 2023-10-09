@@ -22,6 +22,7 @@ class TaskControllerTest extends TestCase
 
         $task = Task::factory()->make();
         $this->user = User::factory()->create();
+        // @phpstan-ignore-next-line
         $this->task = Task::factory()->create();
         $this->tableName = $task->getTable();
         $this->formData = $task->only(
@@ -36,33 +37,33 @@ class TaskControllerTest extends TestCase
 // test index
     public function testConnectionIndexUserTask(): void
     {
-        $this->actingAs($this->user)->get(route('task.index'))
+        $this->actingAs($this->user)->get(route('tasks.index'))
             ->assertStatus(200);
     }
 
     public function testConnectionIndexGuestTask(): void
     {
-        $this->get(route('task.index'))
+        $this->get(route('tasks.index'))
             ->assertStatus(200);
     }
 //test create
     public function testConnectionCreateUserTask(): void
     {
-        $this->actingAs($this->user)->get(route('task.create'))
+        $this->actingAs($this->user)->get(route('tasks.create'))
             ->assertStatus(200);
     }
 
     public function testConnectionCreateGuestTask(): void
     {
-        $this->get(route('task.create'))
+        $this->get(route('tasks.create'))
             ->assertStatus(403);
     }
 
 //test store
     public function testConnectionStoreUserTask(): void
     {
-        $this->actingAs($this->user)->post(route('task.store', $this->formData))
-            ->assertRedirect(route('task.index'));
+        $this->actingAs($this->user)->post(route('tasks.store', $this->formData))
+            ->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
@@ -70,21 +71,21 @@ class TaskControllerTest extends TestCase
 //test edit
     public function testConnectionEditUserTask(): void
     {
-        $this->actingAs($this->user)->get(route('task.edit', $this->task))
+        $this->actingAs($this->user)->get(route('tasks.edit', $this->task))
             ->assertStatus(200);
     }
 
     public function testConnectionEditGuestTask(): void
     {
-        $this->get(route('task.edit', $this->task))
+        $this->get(route('tasks.edit', $this->task))
             ->assertStatus(403);
     }
 //test update
     public function testConnectionUpdateUserTask(): void
     {
         $this->actingAs($this->user)
-            ->patch(route('task.update', $this->task), $this->formData)
-            ->assertRedirect(route('task.index'));
+            ->patch(route('tasks.update', $this->task), $this->formData)
+            ->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
@@ -93,15 +94,15 @@ class TaskControllerTest extends TestCase
     public function testConnectionDestroyUserTask(): void
     {
         $this->actingAs($this->user)
-            ->delete(route('task.destroy', $this->task))
-            ->assertRedirect(route('task.index'));
+            ->delete(route('tasks.destroy', $this->task))
+            ->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseMissing($this->tableName, $this->formData);
     }
 
     public function testConnectionDestroyGuestTask(): void
     {
-        $this->delete(route('task.destroy', $this->task))
+        $this->delete(route('tasks.destroy', $this->task))
             ->assertStatus(403);
     }
 }
