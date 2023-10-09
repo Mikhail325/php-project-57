@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 
 class HexletStubTest extends Component
 {
+    
     public $objects;
     /**
      * Create a new component instance.
