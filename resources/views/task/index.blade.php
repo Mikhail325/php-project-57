@@ -44,7 +44,7 @@
               </div>
             </div>
           </div>
-            <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->created_at()}}</p>
+            <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->dataTame()}}</p>
         </div>
       </div>
       
@@ -67,7 +67,7 @@
             <td>{{$task->id}}</td>
             <th>{{$task->name}}</th>
             <th>{{$task->status->name}}</th>
-            <th>{{$task->created_at()}}</th>
+            <th>{{$task->dataTame()}}</th>
             <th>{{$task->userAuthor->name}}</th>
             <th>{{$task->userExecutor->name}}</th>
         </tr>

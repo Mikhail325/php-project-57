@@ -19,7 +19,7 @@ class TaskController extends Controller
     }
 
     public function index(Request $request)
-    {   
+    {
         $tasks = QueryBuilder::for(Task::class)
             ->allowedFilters([
                 AllowedFilter::exact('status_id'),
@@ -59,7 +59,7 @@ class TaskController extends Controller
             'assigned_to_id' => 'required',
             'label' => '',
         ], $messages);
-        
+
         $label = $data['label'] ?? [];
         unset($data['label']);
 
@@ -68,7 +68,7 @@ class TaskController extends Controller
         $task->created_by_id = Auth::id();
         $task->save();
         $task->labels()->attach($label);
-        
+
         flash(__('messages.The task was successfully created'))->success();
         return redirect()->route('tasks.index');
     }

@@ -40,10 +40,10 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'min:1'],
-            'email' => ['required', 'string', 'email', 'unique:'.User::class],
+            'email' => ['required', 'string', 'email', 'unique:' . User::class],
             'password' => ['required', 'confirmed', 'min:8', Rules\Password::defaults()],
         ], $messages);
-        
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

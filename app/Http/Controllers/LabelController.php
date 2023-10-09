@@ -13,7 +13,7 @@ class LabelController extends Controller
     {
         $this->authorizeResource(Label::class);
     }
-    
+
     public function index()
     {
         $labels = QueryBuilder::for(Label::class)
@@ -39,10 +39,10 @@ class LabelController extends Controller
             'name' => 'required|unique:labels',
             'description' => 'nullable',
         ], $messages);
-    
+
         $labels = new Label();
         $labels->fill($data)->save();
-    
+
         flash(__('messages.The label was created successfully'))->success();
         return redirect()->route('labels.index');
     }
@@ -80,7 +80,6 @@ class LabelController extends Controller
             flash(__('messages.Failed to delete label'))->error();
         }
 
-        
         return redirect()->route('labels.index');
     }
 }

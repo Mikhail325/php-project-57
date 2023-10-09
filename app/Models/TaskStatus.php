@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-class TaskStatus extends Model 
+class TaskStatus extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $guarded = false;
 
-    public function created_at() 
+    public function dataTame()
     {
         return Carbon::parse($this->created_at)->format('d.m.Y');
     }

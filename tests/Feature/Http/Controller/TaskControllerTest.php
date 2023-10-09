@@ -15,7 +15,7 @@ class TaskControllerTest extends TestCase
     private array $formData;
     private User $user;
     private Task $task;
-    
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -34,32 +34,32 @@ class TaskControllerTest extends TestCase
         );
     }
 // test index
-    public function test_connection_index_user_task(): void
+    public function testConnectionIndexUserTask(): void
     {
         $this->actingAs($this->user)->get(route('task.index'))
             ->assertStatus(200);
     }
 
-    public function test_connection_index_guest_task(): void
+    public function testConnectionIndexGuestTask(): void
     {
         $this->get(route('task.index'))
             ->assertStatus(200);
     }
 //test create
-    public function test_connection_create_user_task(): void
+    public function testConnectionCreateUserTask(): void
     {
         $this->actingAs($this->user)->get(route('task.create'))
             ->assertStatus(200);
     }
 
-    public function test_connection_create_guest_task(): void
+    public function testConnectionCreateGuestTask(): void
     {
         $this->get(route('task.create'))
             ->assertStatus(403);
     }
 
 //test store
-    public function test_connection_store_user_task(): void
+    public function testConnectionStoreUserTask(): void
     {
         $this->actingAs($this->user)->post(route('task.store', $this->formData))
             ->assertRedirect(route('task.index'));
@@ -68,19 +68,19 @@ class TaskControllerTest extends TestCase
     }
 
 //test edit
-    public function test_connection_edit_user_task(): void
+    public function testConnectionEditUserTask(): void
     {
         $this->actingAs($this->user)->get(route('task.edit', $this->task))
             ->assertStatus(200);
     }
 
-    public function test_connection_edit_guest_task(): void
+    public function testConnectionEditGuestTask(): void
     {
         $this->get(route('task.edit', $this->task))
             ->assertStatus(403);
     }
 //test update
-    public function test_connection_update_user_task(): void
+    public function testConnectionUpdateUserTask(): void
     {
         $this->actingAs($this->user)
             ->patch(route('task.update', $this->task), $this->formData)
@@ -90,16 +90,16 @@ class TaskControllerTest extends TestCase
     }
 
 //test destroy
-    public function test_connection_destroy_user_task(): void
+    public function testConnectionDestroyUserTask(): void
     {
         $this->actingAs($this->user)
             ->delete(route('task.destroy', $this->task))
             ->assertRedirect(route('task.index'));
-                
+
         $this->assertDatabaseMissing($this->tableName, $this->formData);
     }
 
-    public function test_connection_destroy_guest_task(): void
+    public function testConnectionDestroyGuestTask(): void
     {
         $this->delete(route('task.destroy', $this->task))
             ->assertStatus(403);

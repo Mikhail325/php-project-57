@@ -11,9 +11,10 @@ class Task extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
     protected $guarded = false;
 
-    public function created_at() 
+    public function dataTame()
     {
         return Carbon::parse($this->created_at)->format('d.m.Y');
     }
