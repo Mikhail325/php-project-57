@@ -47,7 +47,6 @@
             <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->dataTame()}}</p>
         </div>
       </div>
-      
     </div>
   @endforeach
   <div class="row d-flex justify-content-between">

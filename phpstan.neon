@@ -1,0 +1,45 @@
+parameters:
+  level: 8
+  paths:
+    - app
+    - routes
+    - tests
+
+  checkMissingIterableValueType: false
+  checkGenericClassInNonGenericObjectType: false
+
+  excludePaths:
+    - code/routes/console.php
+    - code/routes/auth.php
+    - code/app/Helpers/HtmlHelper.php
+    - code/routes/channels.php
+    - code/app/Providers/*
+    - code/app/Http/Middleware/*
+    - code/app/Exceptions/Handler.php
+    - code/app/Models/User.php
+    - code/app/Http/Controllers/Auth/*
+    - code/tests/Feature/Auth/*
+    - code/app/Http/Kernel.php
+
+  reportUnmatchedIgnoredErrors: false
+
+  ignoreErrors:
+   - '#Parameter \#1 \$message of function flash expects string\|null, array\|string\|null given.#'
+   - '#Cannot call method [\w]+\(\) on App\\Models\\User\|null.#'
+   - '#Dynamic call to static method#'
+   # TODO: remove this when larastan release new version
+   - '#<int, Illuminate\\Database\\Eloquent\\Model>\|Illuminate\\Database\\Eloquent\\Model\::\$id#'
+   - '#<int, Illuminate\\Database\\Eloquent\\Model>\|Illuminate\\Database\\Eloquent\\Model\::\$createdBy#'
+   - '#Tests\\Feature\\[\w]+\::\$user \(App\\Models\\User\) does not accept#'
+   - '#Illuminate\\Foundation\\Testing\\TestCase::actingAs\(\) expects Illuminate\\Contracts\\Auth\\Authenticatable#'
+   - '#Illuminate\\Foundation\\Testing\\TestCase::post\(\) expects array, array\|Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>#'
+   - '#Illuminate\\Foundation\\Testing\\TestCase::assertDatabaseHas\(\) expects array, array\|Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>#'
+   - '#Illuminate\\Foundation\\Testing\\TestCase::patch\(\) expects array, array\|Illuminate\\Database\\Eloquent\\Collection<int, Illuminate\\Database\\Eloquent\\Model>#'
+   - '#Unable to resolve the template type TKey in call to function collect#'
+   - '#Unable to resolve the template type TValue in call to function collect#'
+   - '#Call to an undefined method Illuminate\\Http\RedirectResponse|Illuminate\\Routing\\Redirector::route\(\)#'
+   - '#Parameter \#1 $view of function view expects view-string|null, string given.#'
+   # TODO: remove this when add in courses theory of returning types
+   - '#has no return type specified#'
+   - '#should return .* but returns#'
+   - '#Anonymous function should have native return type#'
