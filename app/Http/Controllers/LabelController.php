@@ -72,8 +72,7 @@ class LabelController extends Controller
     public function destroy(Label $label)
     {
         $labels = LabelTask::where('label_id', $label->id)->first();
-
-        if (empty($labels)) {
+        if ($labels === null) {
             $label->delete();
             flash(__('messages.The label was successfully deleted'))->success();
         } else {

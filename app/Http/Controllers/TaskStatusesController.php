@@ -69,7 +69,7 @@ class TaskStatusesController extends Controller
     {
         $statuses = Task::where('status_id', $taskStatus->id)->first();
 
-        if (empty($statuses)) {
+        if ($statuses === null) {
             $taskStatus->delete();
             flash(__('messages.Status successfully deleted'))->success();
         } else {

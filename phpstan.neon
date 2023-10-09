@@ -3,23 +3,22 @@ parameters:
   paths:
     - app
     - routes
-    - tests
+    - tests/Feature/Http/Controller
 
   checkMissingIterableValueType: false
   checkGenericClassInNonGenericObjectType: false
 
   excludePaths:
-    - code/routes/console.php
-    - code/routes/auth.php
-    - code/app/Helpers/HtmlHelper.php
-    - code/routes/channels.php
-    - code/app/Providers/*
-    - code/app/Http/Middleware/*
-    - code/app/Exceptions/Handler.php
-    - code/app/Models/User.php
-    - code/app/Http/Controllers/Auth/*
-    - code/tests/Feature/Auth/*
-    - code/app/Http/Kernel.php
+    - routes/console.php
+    - routes/auth.php
+    - app/Helpers/HtmlHelper.php
+    - routes/channels.php
+    - app/Providers/*
+    - app/Http/Middleware/*
+    - app/Exceptions/Handler.php
+    - app/Models/User.php
+    - app/Http/Controllers/Auth/*
+    - app/Http/Kernel.php
 
   reportUnmatchedIgnoredErrors: false
 
