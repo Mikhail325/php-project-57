@@ -7,10 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-/**
-* App\Models\Task
-* @property int|null $created_by_id 
-*/
 class Task extends Model
 {
     use HasFactory;
