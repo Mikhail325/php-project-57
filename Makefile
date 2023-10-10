@@ -7,4 +7,4 @@ build:
 run:	
 	docker run -p 8000:8000 user_name/task-manager
 test:
-	php artisan test
+	php artisan optimize:clear && php artisan test --testsuite=Feature
