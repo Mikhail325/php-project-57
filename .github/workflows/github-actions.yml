@@ -30,8 +30,7 @@ jobs:
       - name: Run test & publish code coverage
         uses: paambaati/codeclimate-action@v4.0.0
         env:
-          CC_TEST_REPORTER_ID: 3678004e474b45bf61a1bfbb97cd403400487e5dd44bee796e4dd509103222ed
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: make test-coverage
           coverageLocations: ${{github.workplace}}/build/logs/clover.xml:clover
           debug: true
