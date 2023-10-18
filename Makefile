@@ -9,4 +9,4 @@ run:
 test:
 	php artisan test --testsuite=Feature
 test-coverage:
-	XDEBUG_MODE=coverage php artisan test --testsuite=Feature --coverage-clover build/logs/clover.xml
+	XDEBUG_MODE=coverage php artisan test --coverage-clover build/logs/clover.xml
