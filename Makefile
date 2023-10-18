@@ -8,3 +8,5 @@ run:
 	docker run -p 8000:8000 user_name/task-manager
 test:
 	php artisan test --testsuite=Feature
+test-coverage:
+	XDEBUG_MODE=coverage composer exec --verbose phpunit tests -- --coverage-clover build/logs/clover.xml
