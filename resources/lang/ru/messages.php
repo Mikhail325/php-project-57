@@ -65,4 +65,6 @@ return [
     'Status successfully deleted' => 'Статус успешно удалён',
     'Failed to delete status' => 'Не удалось удалить статус',
     'False authenticate' => 'Введите правильные имя пользователя и пароль',
+    'Only the author can delete the task' => 'Удалить задачу может только автор',
+    'Only the author can update the task' => 'Обновить задачу может только автор',
 ];

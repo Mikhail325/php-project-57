@@ -80,6 +80,11 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        if ($task->created_by_id !== (int) Auth::id()) {
+            flash(__('messages.Only the author can update the task'))->error();
+            return redirect()->route('tasks.index');
+        }
+
         $statuses = TaskStatus::all();
         $users = User::all();
         $labels = Label::all();
@@ -104,7 +109,6 @@ class TaskController extends Controller
         unset($data['label']);
 
         $task->fill($data);
-        $task->created_by_id = (int) Auth::id();
         $task->save();
 
         $task->labels()->sync($label);
@@ -114,8 +118,12 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        $task->delete();
-        flash(__('messages.The task was successfully deleted'))->success();
+        if ($task->created_by_id !== (int) Auth::id()) {
+            flash(__('messages.Only the author can delete the task'))->error();
+        } else {
+            $task->delete();
+            flash(__('messages.The task was successfully deleted'))->success();
+        }
         return redirect()->route('tasks.index');
     }
 }
