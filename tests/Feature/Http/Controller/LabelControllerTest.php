@@ -23,7 +23,6 @@ class LabelControllerTest extends TestCase
 
         $label = Label::factory()->make();
         $this->user = User::factory()->create();
-        // @phpstan-ignore-next-line
         $this->label = Label::factory()->create();
         $this->tableName = $label->getTable();
         $this->formData = $label->only(
@@ -33,73 +32,54 @@ class LabelControllerTest extends TestCase
             ]
         );
     }
-// test index
-    public function testConnectionIndexUserLabel(): void
+
+    public function testIndex(): void
     {
         $this->actingAs($this->user)->get(route('labels.index'))
             ->assertStatus(200);
     }
 
-    public function testConnectionIndexGuestLabel(): void
+    public function testCreate(): void
     {
-        $this->get(route('labels.index'))
-            ->assertStatus(200);
-    }
-//test create
-    public function testConnectionCreateUserLabel(): void
-    {
+        $this->get(route('labels.create'))
+            ->assertStatus(403);
+
         $this->actingAs($this->user)->get(route('labels.create'))
             ->assertStatus(200);
     }
 
-    public function testConnectionCreateGuestLabel(): void
+    public function testStore(): void
     {
-        $this->get(route('labels.create'))
-            ->assertStatus(403);
-    }
+        $this->actingAs($this->user)->post(route('labels.store', []))
+            ->assertSessionHasErrors(['name']);
 
-//test store
-    public function testConnectionStoreUserLabel(): void
-    {
         $this->actingAs($this->user)->post(route('labels.store', $this->formData))
+            ->assertSessionHasNoErrors()
             ->assertRedirect(route('labels.index'));
 
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
 
-//test edit
-    public function testConnectionEditUserLabel(): void
+    public function testEdit(): void
     {
+        $this->get(route('labels.edit', $this->label))
+            ->assertStatus(403);
+
         $this->actingAs($this->user)->get(route('labels.edit', $this->label))
             ->assertStatus(200);
     }
 
-    public function testConnectionEditGuestLabel(): void
-    {
-        $this->get(route('labels.edit', $this->label))
-            ->assertStatus(403);
-    }
-//test update
-    public function testConnectionUpdateUserLabel(): void
+    public function testUpdate(): void
     {
         $this->actingAs($this->user)
             ->patch(route('labels.update', $this->label), $this->formData)
+            ->assertSessionHasNoErrors()
             ->assertRedirect(route('labels.index'));
 
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
 
-//test destroy
-    public function testConnectionDestroyUserLabel(): void
-    {
-        $this->actingAs($this->user)
-            ->delete(route('labels.destroy', $this->label))
-            ->assertRedirect(route('labels.index'));
-
-        $this->assertDatabaseMissing($this->tableName, $this->formData);
-    }
-
-    public function testConnectionDestroyUserLabelRelatedTask(): void
+    public function testDestroy(): void
     {
         LabelTask::factory()->create(['label_id' => $this->label]);
         $this->actingAs($this->user)
@@ -112,5 +92,10 @@ class LabelControllerTest extends TestCase
                 'description',
             ]
         ));
+        $this->actingAs($this->user)
+            ->delete(route('labels.destroy', $this->label))
+            ->assertRedirect(route('labels.index'));
+
+        $this->assertDatabaseMissing($this->tableName, $this->formData);
     }
 }
