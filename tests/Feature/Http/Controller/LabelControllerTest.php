@@ -41,18 +41,18 @@ class LabelControllerTest extends TestCase
 
     public function testCreate(): void
     {
-        $this->get(route('labels.create'))
-            ->assertStatus(403);
-
         $this->actingAs($this->user)->get(route('labels.create'))
             ->assertStatus(200);
     }
 
+    public function testCreateUnathorized(): void
+    {
+        $this->get(route('labels.create'))
+            ->assertStatus(403);
+    }
+
     public function testStore(): void
     {
-        $this->actingAs($this->user)->post(route('labels.store', []))
-            ->assertSessionHasErrors(['name']);
-
         $this->actingAs($this->user)->post(route('labels.store', $this->formData))
             ->assertSessionHasNoErrors()
             ->assertRedirect(route('labels.index'));
@@ -60,13 +60,22 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
 
+    public function testStoreEmptyField(): void
+    {
+        $this->actingAs($this->user)->post(route('labels.store', []))
+            ->assertSessionHasErrors(['name']);
+    }
+
     public function testEdit(): void
+    {
+        $this->actingAs($this->user)->get(route('labels.edit', $this->label))
+            ->assertStatus(200);
+    }
+
+    public function testEditUnathorized(): void
     {
         $this->get(route('labels.edit', $this->label))
             ->assertStatus(403);
-
-        $this->actingAs($this->user)->get(route('labels.edit', $this->label))
-            ->assertStatus(200);
     }
 
     public function testUpdate(): void
@@ -81,6 +90,15 @@ class LabelControllerTest extends TestCase
 
     public function testDestroy(): void
     {
+        $this->actingAs($this->user)
+            ->delete(route('labels.destroy', $this->label))
+            ->assertRedirect(route('labels.index'));
+
+        $this->assertDatabaseMissing($this->tableName, $this->formData);
+    }
+
+    public function testDestroyRelatedTask(): void
+    {
         LabelTask::factory()->create(['label_id' => $this->label]);
         $this->actingAs($this->user)
             ->delete(route('labels.destroy', $this->label))
@@ -92,10 +110,5 @@ class LabelControllerTest extends TestCase
                 'description',
             ]
         ));
-        $this->actingAs($this->user)
-            ->delete(route('labels.destroy', $this->label))
-            ->assertRedirect(route('labels.index'));
-
-        $this->assertDatabaseMissing($this->tableName, $this->formData);
     }
 }
