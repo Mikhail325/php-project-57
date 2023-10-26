@@ -42,18 +42,18 @@ class TaskControllerTest extends TestCase
 
     public function testCreate(): void
     {
-        $this->get(route('tasks.create'))
-            ->assertStatus(403);
-
         $this->actingAs($this->user)->get(route('tasks.create'))
             ->assertStatus(200);
     }
 
+    public function testCreateUnathorized(): void
+    {
+        $this->get(route('tasks.create'))
+            ->assertStatus(403);
+    }
+
     public function testStore(): void
     {
-        $this->actingAs($this->user)->post(route('tasks.store', []))
-            ->assertSessionHasErrors(['name', 'status_id', 'assigned_to_id']);
-
         $this->actingAs($this->user)->post(route('tasks.store', $this->formData))
             ->assertRedirect(route('tasks.index'))
             ->assertSessionHasNoErrors();
@@ -61,19 +61,31 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas($this->tableName, $this->formData);
     }
 
+    public function testStoreEmptyField(): void
+    {
+        $this->actingAs($this->user)->post(route('tasks.store', []))
+            ->assertSessionHasErrors(['name', 'status_id', 'assigned_to_id']);
+    }
+
     public function testEdit(): void
     {
-        $this->get(route('tasks.edit', $this->task))
-            ->assertStatus(403);
-
-        $this->actingAs($this->user)
-            ->get(route('tasks.edit', $this->task))
-            ->assertRedirect(route('tasks.index'));
-
         $task = Task::factory()->create(['created_by_id' => $this->user]);
         $this->actingAs($this->user)
             ->get(route('tasks.edit', $task))
             ->assertStatus(200);
+    }
+
+    public function testEditUnathorized(): void
+    {
+        $this->get(route('tasks.edit', $this->task))
+            ->assertStatus(403);
+    }
+
+    public function testEditTaskAnotherUser(): void
+    {
+        $this->actingAs($this->user)
+            ->get(route('tasks.edit', $this->task))
+            ->assertRedirect(route('tasks.index'));
     }
 
     public function testUpdate(): void
@@ -88,13 +100,16 @@ class TaskControllerTest extends TestCase
 
     public function testDestroy(): void
     {
-        $this->delete(route('tasks.destroy', $this->task))
-            ->assertStatus(403);
-
         $this->actingAs($this->user)
             ->delete(route('tasks.destroy', $this->task))
             ->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseMissing($this->tableName, $this->formData);
+    }
+
+    public function testDestroyUnathorized(): void
+    {
+        $this->delete(route('tasks.destroy', $this->task))
+            ->assertStatus(403);
     }
 }
