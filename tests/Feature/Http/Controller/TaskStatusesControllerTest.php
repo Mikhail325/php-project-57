@@ -92,7 +92,7 @@ class TaskStatusesControllerTest extends TestCase
         $this->assertDatabaseMissing($this->tableName, $this->formData);
     }
 
-    public function testDestroyTaskAnotherUser(): void
+    public function testDestroyRelatedTask(): void
     {
         Task::factory()->create(['status_id' => $this->taskStatus]);
         $this->actingAs($this->user)
