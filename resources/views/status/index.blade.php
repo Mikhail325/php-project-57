@@ -17,18 +17,20 @@
                 <div class="col-10 d-flex align-self-center justify-content-end">
                   <p class="text-secondary m-0">{{$status->formatting_date}}</p>
                 </div>
-                @can(['update', 'delete'], $status)
                   <div class="col-2 p-0">
+                    @can('update', $status)
                     <a class="text-secondary link-underline link-underline-opacity-0" href="{{route('task_statuses.edit', $status)}}">
                       <i class="bi bi-pencil hover:text-black"></i>
                       <p class="d-none">{{__('messages.To change')}}</p>
-                    </a>                         
+                    </a>
+                    @endcan
+                    @can('delete', $status)
                     <a class="text-secondary p-0.5" href="{{route('task_statuses.destroy', $status)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
                       <i class="bi bi-trash hover:text-black"></i>
                       <p class="d-none">{{__('messages.Delete')}}</p>
                     </a>
+                    @endcan
                   </div>
-                @endcan
               </div>
             </div>
           </div>    

@@ -42,8 +42,10 @@ class TaskPolicy
 
     /**
      * Determine whether the user can delete the model.
-     * @property \App\Models\Task $author
      */
+    /**
+     * @mixin Task
+    */
     public function delete(User $user, Task $task): bool
     {
         return Auth::id() === $task->author->id;
