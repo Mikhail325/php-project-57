@@ -23,29 +23,31 @@
                   </div>
 
                   <div class="col-5">
-                    <p class="p-2 m-0 pb-0">{{__('messages.Author')}}: {{$task->userAuthor->name}}</p>
-                    <p class="p-2 m-0 pt-0">{{__('messages.Executor')}}: {{$task->userExecutor->name}}</p>
+                    <p class="p-2 m-0 pb-0">{{__('messages.Author')}}: {{$task->author->name}}</p>
+                    <p class="p-2 m-0 pt-0">{{__('messages.Executor')}}: {{$task->assignedToUser->name}}</p>
                   </div>
                 </div>
               </div>
               <div class="col-2">
                 <div class="col-12 d-flex align-items-end flex-column-reverse">
-                  @can(['update', 'delete'], $task)
-                    <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
+                  <div class="p-2 pb-0 top-0 end-0 text-secondary p-0.5">
+                    @can('update', $task)
                       <a class="text-secondary p-0.5 link-underline link-underline-opacity-0" href="{{route('tasks.edit', $task)}}">
                         <i class="bi bi-pencil hover:text-black"></i>
                         <p class="d-none">{{__('messages.To change')}}</p>
                       </a>
+                    @endcan
+                    @can('delete', $task)
                       <a class="text-secondary p-0.5" href="{{route('tasks.destroy', $task)}}" data-confirm="Вы уверены?" data-method="delete" rel="nofollow">
                         <i class="bi bi-trash hover:text-black"></i>
                         <p class="d-none">{{__('messages.Delete')}}</p>
                       </a>
-                    </div>
-                  @endcan
+                    @endcan
+                  </div>
                 </div>
               </div>
             </div>
-              <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->dataTame()}}</p>
+              <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->formatting_date}}</p>
           </div>
         </div>
       </div>
@@ -67,9 +69,9 @@
               <td>{{$task->id}}</td>
               <th>{{$task->name}}</th>
               <th>{{$task->status->name}}</th>
-              <th>{{$task->dataTame()}}</th>
-              <th>{{$task->userAuthor->name}}</th>
-              <th>{{$task->userExecutor->name}}</th>
+              <th>{{$task->formatting_date}}</th>
+              <th>{{$task->author->name}}</th>
+              <th>{{$task->assignedToUser->name}}</th>
           </tr>
       @endforeach
     </table>

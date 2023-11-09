@@ -67,4 +67,7 @@ return [
     'False authenticate' => 'Введите правильные имя пользователя и пароль',
     'Only the author can delete the task' => 'Удалить задачу может только автор',
     'Only the author can update the task' => 'Обновить задачу может только автор',
+    'Greetings from Hexlet!' => 'Привет от Хекслета!',
+    'This is a simple task manager on Laravel' => 'Это простой менеджер задач на Laravel',
+    'Push me' => 'Нажми меня',
 ];

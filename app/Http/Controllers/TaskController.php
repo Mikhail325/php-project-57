@@ -80,11 +80,6 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        if ($task->created_by_id !== (int) Auth::id()) {
-            flash(__('messages.Only the author can update the task'))->error();
-            return redirect()->route('tasks.index');
-        }
-
         $statuses = TaskStatus::all();
         $users = User::all();
         $labels = Label::all();

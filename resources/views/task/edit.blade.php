@@ -11,7 +11,7 @@
     {{ Form::label('description', __('messages.Description')) }}<br>
     {{ Form::textarea('description', $task->description, ['class' => 'form-control']) }}<br>
     {{ Form::label('assigned_to_id', __('messages.Executor')) }}<br>
-    {{ Form::select('assigned_to_id', $users->pluck('name', 'id'), $task->userExecutor->id, ['class' => 'form-control']) }}
+    {{ Form::select('assigned_to_id', $users->pluck('name', 'id'), $task->assignedToUser->id, ['class' => 'form-control']) }}
   </div>
   <div class="col-3 pe-0">
     {{ Form::label('label[]', __('messages.Label')) }}<br>

@@ -4,7 +4,8 @@ namespace Tests\Feature\Http\Controller;
 
 use App\Models\Label;
 use App\Models\User;
-use App\Models\LabelTask;
+use Illuminate\Support\Facades\DB;
+use App\Models\Task;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,6 +17,7 @@ class LabelControllerTest extends TestCase
     private array $formData;
     private User $user;
     private Label $label;
+    private Task $task;
 
     protected function setUp(): void
     {
@@ -24,6 +26,7 @@ class LabelControllerTest extends TestCase
         $label = Label::factory()->make();
         $this->user = User::factory()->create();
         $this->label = Label::factory()->create();
+        $this->task = Task::factory()->create();
         $this->tableName = $label->getTable();
         $this->formData = $label->only(
             [
@@ -99,9 +102,14 @@ class LabelControllerTest extends TestCase
 
     public function testDestroyRelatedTask(): void
     {
-        LabelTask::factory()->create(['label_id' => $this->label]);
+        DB::table('label_tasks')->insert([
+            'label_id' => $this->label->id,
+            'task_id' => $this->task->id,
+        ]);
+
         $this->actingAs($this->user)
             ->delete(route('labels.destroy', $this->label))
+            ->assertStatus(302)
             ->assertRedirect(route('labels.index'));
 
         $this->assertDatabaseHas($this->tableName, $this->label->only(

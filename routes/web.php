@@ -21,19 +21,10 @@ Route::get('/', function () {
     return view('main');
 })->name('main');
 
-Route::resource('task_statuses', TaskStatusesController::class);
-Route::resource('labels', LabelController::class);
-Route::resource('tasks', TaskController::class);
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+Route::resources([
+    'task_statuses' => TaskStatusesController::class,
+    'labels' => LabelController::class,
+    'tasks' => TaskController::class
+]);
 
 require __DIR__ . '/auth.php';

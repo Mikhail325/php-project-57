@@ -20,7 +20,7 @@
                 <div class="col-3 p-2">
                     <div class="row justify-content-end">
                         <div class="col-10 d-flex align-self-center justify-content-end">
-                          <p class="text-secondary m-0">{{$label->dataTame()}}</p>
+                          <p class="text-secondary m-0">{{$label->formatting_date}}</p>
                         </div>
                         @can(['update', 'delete'], $label)
                           <div class="col-2 p-0">

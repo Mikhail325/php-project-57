@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Label;
-use App\Models\LabelTask;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -71,7 +71,7 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-        $labels = LabelTask::where('label_id', $label->id)->first();
+        $labels = DB::table('label_tasks')->where('label_id', $label->id)->first();
         if ($labels === null) {
             $label->delete();
             flash(__('messages.The label was successfully deleted'))->success();

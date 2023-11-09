@@ -81,13 +81,6 @@ class TaskControllerTest extends TestCase
             ->assertStatus(403);
     }
 
-    public function testEditTaskAnotherUser(): void
-    {
-        $this->actingAs($this->user)
-            ->get(route('tasks.edit', $this->task))
-            ->assertRedirect(route('tasks.index'));
-    }
-
     public function testUpdate(): void
     {
         $this->actingAs($this->user)
@@ -100,8 +93,9 @@ class TaskControllerTest extends TestCase
 
     public function testDestroy(): void
     {
+        $task = Task::factory()->create(['created_by_id' => $this->user]);
         $this->actingAs($this->user)
-            ->delete(route('tasks.destroy', $this->task))
+            ->delete(route('tasks.destroy', $task))
             ->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseMissing($this->tableName, $this->formData);
