@@ -42,6 +42,7 @@ class TaskPolicy
 
     /**
      * Determine whether the user can delete the model.
+     * @property \App\Models\Task $author
      */
     public function delete(User $user, Task $task): bool
     {
