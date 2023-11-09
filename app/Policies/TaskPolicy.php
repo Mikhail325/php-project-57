@@ -44,7 +44,7 @@ class TaskPolicy
      * Determine whether the user can delete the model.
      */
     /**
-     * @mixin Task
+     * @mixin \App\Models\Task
     */
     public function delete(User $user, Task $task): bool
     {
