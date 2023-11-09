@@ -8,11 +8,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
-/**
- * App\Models\Task.
- * @property $author
- */
-
 class Task extends Model
 {
     use HasFactory;
