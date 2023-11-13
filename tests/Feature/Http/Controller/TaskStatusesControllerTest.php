@@ -5,13 +5,10 @@ namespace Tests\Feature\Http\Controller;
 use App\Models\Task;
 use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TaskStatusesControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private string $tableName;
     private array $formData;
     private User $user;

@@ -47,7 +47,7 @@
                 </div>
               </div>
             </div>
-              <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->formatting_date}}</p>
+              <p class="m-0 px-2 pb-2 text-secondary position-absolute bottom-0 end-0">{{$task->formatted_date}}</p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
               <td>{{$task->id}}</td>
               <th>{{$task->name}}</th>
               <th>{{$task->status->name}}</th>
-              <th>{{$task->formatting_date}}</th>
+              <th>{{$task->formatted_date}}</th>
               <th>{{$task->author->name}}</th>
               <th>{{$task->assignedToUser->name}}</th>
           </tr>

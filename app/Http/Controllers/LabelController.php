@@ -16,8 +16,7 @@ class LabelController extends Controller
 
     public function index()
     {
-        $labels = QueryBuilder::for(Label::class)
-        ->orderBy('id')
+        $labels = Label::orderBy('id')
         ->paginate(9);
         return view('label.index', compact('labels'));
     }
@@ -55,11 +54,12 @@ class LabelController extends Controller
     public function update(Request $request, Label $label)
     {
         $messages = [
-            'name' => 'Это обязательное поле'
+            'name' => 'Это обязательное поле',
+            'name.unique' => 'Метка с таким именем уже существует'
         ];
 
         $data = $this->validate($request, [
-            'name' => 'required:labels,name,' . $label->id,
+            'name' => 'required|unique:labels,name,' . $label->id,
             'description' => 'nullable:labels,description,' . $label->id,
         ], $messages);
 
@@ -71,8 +71,8 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-        $labels = DB::table('label_tasks')->where('label_id', $label->id)->first();
-        if ($labels === null) {
+        $labels = $label->tasks()->exists($label->id);
+        if ($labels === false) {
             $label->delete();
             flash(__('messages.The label was successfully deleted'))->success();
         } else {

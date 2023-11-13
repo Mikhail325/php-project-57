@@ -4,15 +4,12 @@ namespace Tests\Feature\Http\Controller;
 
 use App\Models\Label;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use App\Models\Task;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 
 class LabelControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private string $tableName;
     private array $formData;
     private User $user;
@@ -102,10 +99,7 @@ class LabelControllerTest extends TestCase
 
     public function testDestroyRelatedTask(): void
     {
-        DB::table('label_tasks')->insert([
-            'label_id' => $this->label->id,
-            'task_id' => $this->task->id,
-        ]);
+        $this->task->labels()->attach($this->label);
 
         $this->actingAs($this->user)
             ->delete(route('labels.destroy', $this->label))

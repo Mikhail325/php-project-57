@@ -16,8 +16,7 @@ class TaskStatusesController extends Controller
 
     public function index()
     {
-        $statuses = QueryBuilder::for(TaskStatus::class)
-        ->orderBy('id')
+        $statuses = TaskStatus::orderBy('id')
         ->paginate(9);
         return view('status.index', compact('statuses'));
     }
@@ -53,10 +52,11 @@ class TaskStatusesController extends Controller
     public function update(Request $request, TaskStatus $taskStatus)
     {
         $messages = [
-            'name.required' => 'Это обязательное поле'
+            'name.required' => 'Это обязательное поле',
+            'name.unique' => 'Статус с таким именем уже существует'
         ];
         $data = $this->validate($request, [
-            'name' => 'required:task_statuses,name,' . $taskStatus->id,
+            'name' => 'required|unique:task_statuses,name,' . $taskStatus->id,
         ], $messages);
 
         $taskStatus->fill($data)->save();
@@ -67,9 +67,9 @@ class TaskStatusesController extends Controller
 
     public function destroy(TaskStatus $taskStatus)
     {
-        $statuses = Task::where('status_id', $taskStatus->id)->first();
+        $statuses = $taskStatus->tasks()->exists($taskStatus->id);
 
-        if ($statuses === null) {
+        if ($statuses === false) {
             $taskStatus->delete();
             flash(__('messages.Status successfully deleted'))->success();
         } else {

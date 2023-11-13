@@ -4,13 +4,10 @@ namespace Tests\Feature\Http\Controller;
 
 use App\Models\Task;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class TaskControllerTest extends TestCase
 {
-    use RefreshDatabase;
-
     private string $tableName;
     private array $formData;
     private User $user;

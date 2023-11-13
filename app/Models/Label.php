@@ -13,9 +13,12 @@ class Label extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $guarded = false;
+    protected $fillable = [
+        'name',
+        'description'
+    ];
 
-    protected function formattingDate(): Attribute
+    protected function formattedDate(): Attribute
     {
         return Attribute::make(
             get: fn() => Carbon::parse($this->created_at)->format('d.m.Y'),
