@@ -23,8 +23,8 @@ class LabelController extends Controller
 
     public function create()
     {
-        $labels = new Label();
-        return view('label.create', compact('labels'));
+        $label = new Label();
+        return view('label.create', compact('label'));
     }
 
     public function store(Request $request)
@@ -39,8 +39,8 @@ class LabelController extends Controller
             'description' => 'nullable',
         ], $messages);
 
-        $labels = new Label();
-        $labels->fill($data)->save();
+        $label = new Label();
+        $label->fill($data)->save();
 
         flash(__('messages.The label was created successfully'))->success();
         return redirect()->route('labels.index');
@@ -71,8 +71,7 @@ class LabelController extends Controller
 
     public function destroy(Label $label)
     {
-        $labels = $label->tasks()->exists($label->id);
-        if ($labels === false) {
+        if (!$label->tasks()->exists($label->id)) {
             $label->delete();
             flash(__('messages.The label was successfully deleted'))->success();
         } else {

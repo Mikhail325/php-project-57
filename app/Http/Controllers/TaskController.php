@@ -60,14 +60,13 @@ class TaskController extends Controller
             'label' => '',
         ], $messages);
 
-        $label = $data['label'] ?? [];
-        unset($data['label']);
+        $labels = $data['label'] ?? [];
 
         $task = new Task();
         $task->fill($data);
         $task->created_by_id = (int) Auth::id();
         $task->save();
-        $task->labels()->attach($label);
+        $task->labels()->attach($labels);
 
         flash(__('messages.The task was successfully created'))->success();
         return redirect()->route('tasks.index');
@@ -100,13 +99,12 @@ class TaskController extends Controller
             'assigned_to_id' => 'required:tasks,assigned_to_id' . $task->id,
             'label' => '',
         ], $messages);
-        $label = $data['label'] ?? [];
-        unset($data['label']);
+        $labels = $data['label'] ?? [];
 
         $task->fill($data);
         $task->save();
 
-        $task->labels()->sync($label);
+        $task->labels()->sync($labels);
         flash(__('messages.The task has been successfully updated'))->success();
         return redirect()->route('tasks.index');
     }

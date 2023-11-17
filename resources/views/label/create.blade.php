@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-  {{ Form::model($labels, ['route' => 'labels.store']) }}
+  {{ Form::model($label, ['route' => 'labels.store']) }}
     <div class="row m-0">
       <div class="col-9 square border border-light bg-slate-100 rounded p-3">
       {{ Form::label('name', __('messages.Title')) }}

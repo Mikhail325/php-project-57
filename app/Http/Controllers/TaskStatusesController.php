@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\TaskStatus;
 use Illuminate\Http\Request;
-use App\Models\Task;
-use Spatie\QueryBuilder\QueryBuilder;
 
 class TaskStatusesController extends Controller
 {
@@ -67,9 +65,7 @@ class TaskStatusesController extends Controller
 
     public function destroy(TaskStatus $taskStatus)
     {
-        $statuses = $taskStatus->tasks()->exists($taskStatus->id);
-
-        if ($statuses === false) {
+        if (!$taskStatus->tasks()->exists($taskStatus->id)) {
             $taskStatus->delete();
             flash(__('messages.Status successfully deleted'))->success();
         } else {
