@@ -87,8 +87,9 @@
     {{ Form::open(['class' => 'form', 'route' => 'tasks.index', 'method' => 'get'])}}
     <div class="row">
         <div class="col-2">{{ Form::select('filter[status_id]', $statuses, $filter['status_id'] ?? null, ['placeholder' => __('messages.Status'), 'class' => 'form-control']) }}</div>
+        <div class="col-4">{{ Form::select('filter[created_by_id]', $users, $filter['created_by_id'] ?? null, ['placeholder' => 'Автор', 'class' => 'form-control']) }}</div>
         <div class="col-4">{{ Form::select('filter[assigned_to_id]', $users, $filter['assigned_to_id'] ?? null, ['placeholder' => __('messages.Executor'), 'class' => 'form-control']) }}</div>
-        <div class="col-2 offset-md-4 d-flex align-self-center justify-content-end">
+        <div class="col-2 d-flex justify-content-end">
           {{ Form::submit(__('messages.Apply'), ['class' => 'btn btn-primary']) }}
         </div>
     </div>
