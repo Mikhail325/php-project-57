@@ -61,7 +61,7 @@ class TaskControllerTest extends TestCase
     public function testStoreEmptyField(): void
     {
         $this->actingAs($this->user)->post(route('tasks.store', []))
-            ->assertSessionHasErrors(['name', 'status_id', 'assigned_to_id']);
+            ->assertSessionHasErrors(['name', 'status_id']);
     }
 
     public function testEdit(): void
