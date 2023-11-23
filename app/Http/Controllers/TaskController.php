@@ -40,9 +40,9 @@ class TaskController extends Controller
     public function create()
     {
         $task = new Task();
-        $statuses = TaskStatus::all();
-        $users = User::all();
-        $labels = Label::all();
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
         return view('task.create', compact('task', 'statuses', 'users', 'labels'));
     }
 
@@ -52,13 +52,12 @@ class TaskController extends Controller
             'name.required' => 'Это обязательное поле',
             'name.unique' => 'Задача с таким именем уже существует',
             'status_id' => 'Это обязательное поле',
-            'assigned_to_id' => 'Это обязательное поле',
         ];
         $data = $this->validate($request, [
             'name' => 'required|unique:tasks',
             'description' => 'nullable',
             'status_id' => 'required',
-            'assigned_to_id' => 'required',
+            'assigned_to_id' => '',
             'label' => '',
         ], $messages);
 
@@ -81,9 +80,9 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        $statuses = TaskStatus::all();
-        $users = User::all();
-        $labels = Label::all();
+        $statuses = TaskStatus::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
+        $labels = Label::pluck('name', 'id');
         return view('task.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
@@ -98,7 +97,7 @@ class TaskController extends Controller
             'name' => 'required:tasks,name,' . $task->id,
             'description' => 'nullable:tasks,description' . $task->id,
             'status_id' => 'required:tasks,status_id' . $task->id,
-            'assigned_to_id' => 'required:tasks,assigned_to_id' . $task->id,
+            'assigned_to_id' => '',
             'label' => '',
         ], $messages);
         $labels = $data['label'] ?? [];

@@ -23,8 +23,12 @@
                   </div>
 
                   <div class="col-5">
-                    <p class="p-2 m-0 pb-0">{{__('messages.Author')}}: {{$task->author->name}}</p>
-                    <p class="p-2 m-0 pt-0">{{__('messages.Executor')}}: {{$task->assignedToUser->name}}</p>
+                    @if (isset($task->assignedToUser))
+                      <p class="p-2 m-0 pb-0">{{__('messages.Author')}}: {{$task->author->name}}</p>
+                      <p class="p-2 m-0 pt-0">{{__('messages.Executor')}}: {{$task->assignedToUser->name}}</p>
+                    @else
+                      <p class="p-2 m-0 mb-4">{{__('messages.Author')}}: {{$task->author->name}}</p>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -71,7 +75,7 @@
               <th>{{$task->status->name}}</th>
               <th>{{$task->formatted_date}}</th>
               <th>{{$task->author->name}}</th>
-              <th>{{$task->assignedToUser->name}}</th>
+              <th>{{$task->assignedToUser->name ?? ''}}</th>
           </tr>
       @endforeach
     </table>
